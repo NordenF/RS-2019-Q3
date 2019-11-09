@@ -1,0 +1,49 @@
+%icon {
+  width: 24px;
+  height: 24px;
+  background: left center no-repeat;
+}
+
+%color-icon {
+  width: 24px;
+  height: 24px;
+  border: black 1px solid;
+  border-radius: 50%;
+}
+
+$btn-background-color: white;
+
+.btn {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: $btn-background-color;
+
+  &:hover {
+    background-color: darken($btn-background-color, 30%);
+  }
+}
+
+.btn.center {
+  justify-content: center;
+}
+
+.btn__icon-wrapper {
+  width: 57px;
+  padding-left: 10px;
+  display: flex;
+}
+
+.btn__caption {
+  font: $roboto_400_16_24;
+  color: rgba(0, 0, 0, 0.541327);
+}
+
+.delimiter {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+}
+

@@ -1,0 +1,50 @@
+$header-background-color: white;
+
+.header {
+  height: $header-height;
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: $header-background-color;
+  box-shadow: 0 4px 4px rgba(black, 0.24);
+  display: flex;
+  align-items: center;
+}
+
+%header__btn {
+  width: $header-height;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($header-background-color, 30%);
+  }
+}
+
+.header__nav-btn {
+  @extend %header__btn;
+  margin-right: 24px;
+}
+
+.header__menu-btn {
+  @extend %header__btn;
+  margin-left: auto;
+}
+
+.nav-icon {
+  @extend %icon;
+  background-image: url("../assets/img/nav.svg");
+}
+
+.menu-icon {
+  @extend %icon;
+  background-image: url("../assets/img/menu.svg");
+}
+
+.header__caption {
+  font: $roboto_500_20_23;
+}
