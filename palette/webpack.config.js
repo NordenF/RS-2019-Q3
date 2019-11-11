@@ -1,27 +1,28 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const sass = require('sass');
 
 // Webpack uses this to work with directories
-const path = require("path");
+const path = require('path');
 
 // This is main configuration object.
 // Here you write different options and tell Webpack what to do
 module.exports = {
 
   // Path to your entry point. From this file Webpack will begin his work
-  entry: "./src/javascript/index.js",
+  entry: './src/javascript/index.js',
 
   // Path and filename of your result bundle.
   // Webpack will bundle all JavaScript into this file
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js"
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
 
   // Default mode for Webpack is production.
   // Depending on mode Webpack will apply different things
   // on final bundle. For now we don't need production's JavaScript
   // minifying and other thing so let's set mode to development
-  mode: "development",
+  mode: 'development',
 
   module: {
     rules: [
@@ -29,11 +30,11 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env"]
-          }
-        }
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
       {
         // Apply rule for .sass, .scss or .css files
@@ -47,24 +48,24 @@ module.exports = {
             // After all CSS loaders we use plugin to do his work.
             // It gets all transformed CSS and extracts it into separate
             // single bundled file
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             // This loader resolves url() and @imports inside CSS
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
             // Then we apply postCSS fixes like autoprefixer and minifying
-            loader: "postcss-loader"
+            loader: 'postcss-loader',
           },
           {
             // First we transform SASS to standard CSS
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
-              implementation: require("sass")
-            }
-          }
-        ]
+              implementation: sass,
+            },
+          },
+        ],
       },
       {
         // Now we apply rule for images
@@ -72,15 +73,15 @@ module.exports = {
         use: [
           {
             // Using file-loader for these files
-            loader: "file-loader",
+            loader: 'file-loader',
 
             // In options we can set different things like format
             // and directory to save
             options: {
-              outputPath: "images"
-            }
-          }
-        ]
+              outputPath: 'images',
+            },
+          },
+        ],
       },
       {
         // Apply rule for fonts files
@@ -88,18 +89,18 @@ module.exports = {
         use: [
           {
             // Using file-loader too
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              outputPath: "fonts"
-            }
-          }
-        ]
-      }
-    ]
+              outputPath: 'fonts',
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "bundle.css"
-    })
-  ]
+      filename: 'bundle.css',
+    }),
+  ],
 };
