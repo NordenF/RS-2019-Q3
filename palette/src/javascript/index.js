@@ -21,7 +21,7 @@ class State {
     return {
       tool: 'pencil',
       previousTool: 'pencil',
-      color: '#31d0cc',
+      color: '#006400', // Darkgreen.
       previousColor: '#ffffff',
       picture: Picture.empty(4, 4, '#ffffff'),
     };
