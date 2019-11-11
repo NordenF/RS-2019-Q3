@@ -9,7 +9,6 @@ class Canvas {
     this.ctx.mozImageSmoothingEnabled = false;
     this.ctx.imageSmoothingEnabled = false;
 
-
     this.state = state;
     this.syncState();
     this.state.subscribe(() => {
