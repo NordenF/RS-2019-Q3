@@ -19,7 +19,7 @@
   <main class="main">
     <div class="main__left">
       <div class="panel panel-tools">
-        <div class="btn">
+        <div class="btn" id="paint-bucket">
           <div class="btn__icon-wrapper">
             <div class="paint-bucket-icon"></div>
           </div>
@@ -27,7 +27,7 @@
             Paint bucket
           </button>
         </div>
-        <div class="btn">
+        <div class="btn" id="choose-color">
           <div class="btn__icon-wrapper">
             <div class="choose-color-icon"></div>
           </div>
@@ -35,7 +35,7 @@
             Choose color
           </button>
         </div>
-        <div class="btn">
+        <div class="btn active" id="pencil">
           <div class="btn__icon-wrapper">
             <div class="pencil-icon"></div>
           </div>
@@ -44,7 +44,7 @@
           </button>
         </div>
         <hr class="delimiter">
-        <div class="btn">
+        <div class="btn disabled">
           <div class="btn__icon-wrapper">
             <div class="move-icon"></div>
           </div>
@@ -52,7 +52,7 @@
             Move
           </button>
         </div>
-        <div class="btn">
+        <div class="btn disabled">
           <div class="btn__icon-wrapper">
             <div class="transform-icon"></div>
           </div>
@@ -63,33 +63,35 @@
       </div>
       <div class="panel panel-colors">
         <div class="btn">
-          <input type="color" value="#00FF00" name="switch-color" id="switch-color">
-          <label for="switch-color">Current</label>
+          <label class="color-picker">
+            <input class="color-picker__control" type="color" id="switch-color" />
+            <span class="color-picker__label">Current</span>
+          </label>
         </div>
-        <div class="btn" id="prev-color">
-          <div class="btn__icon-wrapper">
-            <div class="prev-color-icon"></div>
-          </div>
-          <button class="btn__caption">
-            Prev
-          </button>
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" id="prev-color" disabled />
+            <span class="color-picker__label">Prev</span>
+          </label>
         </div>
         <hr class="delimiter">
         <div class="btn">
-          <div class="btn__icon-wrapper">
-            <div class="red-color-icon"></div>
-          </div>
-          <button class="btn__caption">
-            Red
-          </button>
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" value="#ff0000" disabled />
+            <span class="color-picker__label">Red</span>
+          </label>
         </div>
         <div class="btn">
-          <div class="btn__icon-wrapper">
-            <div class="blue-color-icon"></div>
-          </div>
-          <button class="btn__caption">
-            Blue
-          </button>
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" value="#00ff00" disabled />
+            <span class="color-picker__label">Green</span>
+          </label>
+        </div>
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" value="#0000ff" disabled />
+            <span class="color-picker__label">Blue</span>
+          </label>
         </div>
       </div>
     </div>
@@ -111,6 +113,11 @@
         <div class="btn center" id="btn_64x64" data-size="64">
           <button class="btn__caption">
             Reset 64x64
+          </button>
+        </div>
+        <div class="btn center" id="btn_full_reset" data-size="64">
+          <button class="btn__caption">
+            Full reset state
           </button>
         </div>
       </div>

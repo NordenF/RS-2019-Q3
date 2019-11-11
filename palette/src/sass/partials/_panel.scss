@@ -30,24 +30,3 @@
   @extend %icon;
   background-image: url("../assets/img/transform.svg");
 }
-
-
-.current-color-icon {
-  @extend %color-icon;
-  background-color: #C4C4C4;
-}
-
-.prev-color-icon {
-  @extend %color-icon;
-  background-color: #41F795;
-}
-
-.red-color-icon {
-  @extend %color-icon;
-  background-color: red;
-}
-
-.blue-color-icon {
-  @extend %color-icon;
-  background-color: blue;
-}
