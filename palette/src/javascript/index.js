@@ -102,13 +102,34 @@ class Canvas {
 }
 
 class State {
-  constructor(tool, previousTool, color, previousColor, picture) {
-    this.tool = tool;
-    this.previousTool = previousTool;
-    this.color = color;
-    this.previousColor = previousColor;
-    this.picture = picture;
+  constructor(config) {
+    const defaults = this.getDefauls();
+    Object.assign(this, defaults, config);
+    if (this.picture.constructor.name !== 'Picture') {
+      this.picture = new Picture(
+        config.picture.width, config.picture.height, config.picture.pixels);
+    }
     this.listeners = [];
+  }
+
+  getDefauls() {
+    return {
+      tool: 'pencil',
+      previousTool: 'pencil',
+      color: '#31d0cc',
+      previousColor: '#ffffff',
+      picture: Picture.empty(4, 4, '#ffffff'),
+    };
+  }
+
+  getConfig() {
+    return {
+      tool: this.tool,
+      previousTool: this.previousTool,
+      color: this.color,
+      previousColor: this.previousColor,
+      picture: this.picture,
+    };
   }
 
   subscribe(listener) {
@@ -124,11 +145,29 @@ class State {
   setNewTool(tool) {
     this.previousTool = this.tool;
     this.tool = tool;
+    this.notifyListeners()
   }
 
   setNewColor(color) {
     this.previousColor = this.color;
     this.color = color;
+    this.notifyListeners();
+  }
+
+  setNewPicture(picture) {
+    this.picture = picture;
+    this.notifyListeners();
+  }
+
+  draw(pixelsToDraw) {
+    this.picture.draw(pixelsToDraw);
+    this.notifyListeners();
+  }
+
+  reset(size) {
+    Object.assign(this, this.getDefauls());
+    this.picture = Picture.empty(size, size, '#ffffff');
+    this.notifyListeners();
   }
 }
 
@@ -196,60 +235,90 @@ function linePixels(position0, position1) {
   return resultPixels;
 }
 
-function getDefaultState() {
-  return new State(
-    'pencil',
-    'pencil',
-    '#31d0cc',
-    '#ffffff',
-    Picture.empty(4, 4, '#ffffff'),
-  );
-}
+const around = [
+  {
+    dx: -1,
+    dy: 0,
+  },
+  {
+    dx: 1,
+    dy: 0,
+  },
+  {
+    dx: 0,
+    dy: -1,
+  },
+  {
+    dx: 0,
+    dy: 1,
+  },
+];
 
-function loadState() {
-  let storaged = null; //localStorage.getItem("pallete-state");
-  if (storaged) {
-    return new State(
-      storaged.tool,
-      storaged.previousTool,
-      storaged.color,
-      storaged.previousColor,
-      storaged.picture,
-    );
-  }
-  return getDefaultState();
-}
+const tools = {
+  'choose-color': (pos, state) => {
+    state.setNewColor(state.picture.pixel(pos.x, pos.y));
+    state.setNewTool(state.previousTool);
+    return null;
+  },
+  pencil: (pos, state) => {
+    let prevPos = pos;
 
-function saveState(state) {
-  localStorage.setItem("pallete-state", {
-    tool: state.tool,
-    previousTool: state.previousTool,
-    color: state.color,
-    previousColor: state.previousColor,
-    picture: state.picture,
-  });
-}
+    function drawPixel(p, st) {
+      const pixels = linePixels(prevPos, p);
 
-//var serialObj = JSON.stringify(obj); //сериализуем его
+      for (let i = 0; i < pixels.length; i += 1) {
+        pixels[i].color = state.color;
+      }
 
-//localStorage.setItem("myKey", serialObj); //запишем его в хранилище по ключу "myKey"
+      st.draw(pixels);
+      prevPos = p;
+    }
 
-//var returnObj = JSON.parse(localStorage.getItem("myKey")) //спарсим его обратно объект
+    drawPixel(pos, state);
+    return drawPixel;
+  },
+  'paint-bucket': (pos, state) => {
+    const targetColor = state.picture.pixel(pos.x, pos.y);
+    const pixelsToDraw = [
+      {
+        x: pos.x,
+        y: pos.y,
+        color: state.color,
+      },
+    ];
+    for (let done = 0; done < pixelsToDraw.length; done += 1) {
+      for (let i = 0; i < around.length; i += 1) {
+        const {
+          dx,
+          dy,
+        } = around[i];
+        const x = pixelsToDraw[done].x + dx;
+        const y = pixelsToDraw[done].y + dy;
+        if (x >= 0 && x < state.picture.width && y >= 0 && y < state.picture.height
+          && state.picture.pixel(x, y) === targetColor
+          && !pixelsToDraw.some((p) => p.x === x && p.y === y)
+        ) {
+          pixelsToDraw.push({
+            x, y, color: state.color,
+          });
+        }
+      }
+    }
+    state.draw(pixelsToDraw);
+    return null;
+  },
+};
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  let state = loadState();
+  const stateConfig = JSON.parse(localStorage.getItem("pallete-state"));
+  const state = new State(stateConfig);
   window.addEventListener('beforeunload', () => {
-    saveState(state);
-  });
-
-  document.getElementById('btn_full_reset').addEventListener('click', () => {
-    state = getDefaultState();
+    localStorage.setItem('pallete-state', JSON.stringify(state.getConfig()));
   });
 
   const reset = (size) => {
-    state.picture = Picture.empty(size, size, '#ffffff');
-    state.notifyListeners();
+    state.reset(size);
   };
 
   const resetButtons = [
@@ -263,56 +332,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const around = [{dx: -1, dy: 0}, {dx: 1, dy: 0},
-    {dx: 0, dy: -1}, {dx: 0, dy: 1}];
+  const toolsControls = document.querySelectorAll('.panel-tools .btn');
+  for (let i = 0; i < toolsControls.length; i += 1) {
+    const toolId = toolsControls[i].id;
+    if (toolId) {
+      toolsControls[i].addEventListener('click', () => {
+        state.setNewTool(toolId);
+      });
 
-  const tools = {
-    'choose-color': (pos, state) => {
-      state.setNewColor(state.picture.pixel(pos.x, pos.y));
-      state.setNewTool(state.previousTool);
-      state.notifyListeners();
-      return null;
-    },
-    pencil: (pos, state) => {
-      let prevPos = pos;
-
-      function drawPixel(p, state) {
-        const pixels = linePixels(prevPos, p);
-        for (let i = 0; i < pixels.length; i += 1) {
-          pixels[i].color = state.color;
-        }
-        state.picture.draw(pixels);
-        state.notifyListeners();
-        prevPos = p;
-      }
-
-      drawPixel(pos, state);
-      return drawPixel;
-    },
-    'paint-bucket': (pos, state) => {
-      const targetColor = state.picture.pixel(pos.x, pos.y);
-      const pixelsToDraw = [{x: pos.x, y: pos.y, color: state.color}];
-      for (let done = 0; done < pixelsToDraw.length; done += 1) {
-        for (let i = 0; i < around.length; i += 1) {
-          const dx = around[i].dx;
-          const dy = around[i].dy;
-          const x = pixelsToDraw[done].x + dx;
-          const y = pixelsToDraw[done].y + dy;
-          if (x >= 0 && x < state.picture.width && y >= 0 && y < state.picture.height
-            && state.picture.pixel(x, y) === targetColor
-            && !pixelsToDraw.some((p) => p.x === x && p.y === y)
-          ) {
-            pixelsToDraw.push({
-              x, y, color: state.color,
-            });
+      const hotKey = toolsControls[i].getAttribute('data-hotkey-code');
+      if (hotKey) {
+        document.addEventListener('keydown', (ev) => {
+          if (ev.code === hotKey) {
+            state.setNewTool(toolId);
           }
-        }
+        });
       }
-      state.picture.draw(pixelsToDraw);
-      state.notifyListeners();
-      return null;
-    },
-  };
+
+      state.subscribe(() => {
+        toolsControls[i].classList.toggle('active', state.tool === toolId);
+      });
+    }
+  }
+
+  const switchColor = document.getElementById('switch-color');
+  switchColor.addEventListener('change', () => {
+    state.setNewColor(switchColor.value);
+  });
+  state.subscribe(() => {
+    switchColor.value = state.color;
+  });
+
+  const prevColor = document.getElementById('prev-color');
+  state.subscribe(() => {
+    prevColor.value = state.previousColor;
+  });
+
+  const colors = document.querySelectorAll('.color-picker.clickable');
+  for (let i = 0; i < colors.length; i += 1) {
+    colors[i].addEventListener('click', () => {
+      state.previousColor = state.color;
+      state.setNewColor(colors[i].querySelector('.color-picker__control').value);
+    });
+  }
 
   const mouseDown = (pos) => {
     const tool = tools[state.tool];
@@ -328,43 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
     state,
     mouseDown,
   );
-
-  const toolsControls = document.querySelectorAll('.panel-tools .btn');
-  for (let i = 0; i < toolsControls.length; i += 1) {
-    const toolId = toolsControls[i].id;
-    if (toolId) {
-      toolsControls[i].addEventListener('click', () => {
-        state.setNewTool(toolId);
-        state.notifyListeners();
-      });
-      state.subscribe(() => {
-        toolsControls[i].classList.toggle('active', state.tool === toolId);
-      });
-    }
-  }
-
-  const switchColor = document.getElementById('switch-color');
-  switchColor.addEventListener('change', () => {
-    state.setNewColor(switchColor.value);
-    state.notifyListeners();
-  });
-  state.subscribe(() => {
-    switchColor.value = state.color;
-  });
-
-  const prevColor = document.getElementById('prev-color');
-  state.subscribe(() => {
-    prevColor.value = state.previousColor;
-  });
-
-  const colors = document.querySelectorAll('.color-picker.clickable');
-  for (let i = 0; i < colors.length; i += 1) {
-    colors[i].addEventListener('click', () => {
-      state.previousColor = state.color;
-      state.color = colors[i].querySelector('.color-picker__control').value;
-      state.notifyListeners();
-    });
-  }
 
   state.notifyListeners();
 });
