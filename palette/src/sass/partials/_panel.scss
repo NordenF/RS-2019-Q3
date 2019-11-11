@@ -16,6 +16,11 @@
   background-image: url("../assets/img/choose-color.svg");
 }
 
+.pencil-icon {
+  @extend %icon;
+  background-image: url("../assets/img/pencil.svg");
+}
+
 .move-icon {
   @extend %icon;
   background-image: url("../assets/img/move.svg");

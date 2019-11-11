@@ -35,6 +35,14 @@
             Choose color
           </button>
         </div>
+        <div class="btn">
+          <div class="btn__icon-wrapper">
+            <div class="pencil-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Pencil
+          </button>
+        </div>
         <hr class="delimiter">
         <div class="btn">
           <div class="btn__icon-wrapper">
@@ -55,14 +63,10 @@
       </div>
       <div class="panel panel-colors">
         <div class="btn">
-          <div class="btn__icon-wrapper">
-            <div class="current-color-icon"></div>
-          </div>
-          <button class="btn__caption">
-            Current
-          </button>
+          <input type="color" value="#00FF00" name="switch-color" id="switch-color">
+          <label for="switch-color">Current</label>
         </div>
-        <div class="btn">
+        <div class="btn" id="prev-color">
           <div class="btn__icon-wrapper">
             <div class="prev-color-icon"></div>
           </div>
@@ -94,19 +98,19 @@
     </div>
     <div class="main__column">
       <div class="panel panel-switch">
-        <div class="btn center" id="btn_4x4">
+        <div class="btn center" id="btn_4x4" data-size="4">
           <button class="btn__caption">
-            4x4
+            Reset 4x4
           </button>
         </div>
-        <div class="btn center" id="btn_32x32">
+        <div class="btn center" id="btn_32x32" data-size="32">
           <button class="btn__caption">
-            32x32
+            Reset 32x32
           </button>
         </div>
-        <div class="btn center" id="btn_64x64">
+        <div class="btn center" id="btn_64x64" data-size="64">
           <button class="btn__caption">
-            64x64
+            Reset 64x64
           </button>
         </div>
       </div>

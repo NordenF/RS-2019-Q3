@@ -3,73 +3,196 @@ import '../sass/styles.scss';
 import 'file-loader?name=[name].[ext]!../index.html';
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const canvasSize = 512;
-  const canvas = document.getElementById('canvas');
-
-  canvas.width = canvasSize;
-  canvas.height = canvasSize;
-
-  const ctx = canvas.getContext('2d');
-
-  ctx.webkitImageSmoothingEnabled = false;
-  ctx.mozImageSmoothingEnabled = false;
-  ctx.imageSmoothingEnabled = false;
-
-  function clearCanvas() {
-    ctx.clearRect(0, 0, canvasSize, canvasSize);
+class Picture {
+  constructor(width, height, pixels) {
+    this.width = width;
+    this.height = height;
+    this.pixels = pixels;
   }
 
-  /*
-  function drawMatrix(size, jsonData, colorParser = null) {
-    if (!colorParser) {
-      colorParser = (color) => color;
+  static empty(width, height, color) {
+    const pixels = new Array(width * height).fill(color);
+    return new Picture(width, height, pixels);
+  }
+
+  pixel(x, y) {
+    return this.pixels[x + y * this.width];
+  }
+
+  draw(pixels) {
+    for (let {x, y, color} of pixels) {
+      this.pixels[x + y * this.width] = color;
     }
+  }
+}
 
-    const tempCanvas = document.createElement('canvas');
-    tempCanvas.width = size;
-    tempCanvas.height = size;
 
-    const tempCtx = tempCanvas.getContext('2d');
+class Canvas {
+  constructor(canvasElement, state, onMouseDown) {
+    const canvasSize = 512;
+    this.canvas = canvasElement;
+    this.canvas.width = canvasSize;
+    this.canvas.height = canvasSize;
+    this.ctx = this.canvas.getContext('2d');
+    this.ctx.webkitImageSmoothingEnabled = false;
+    this.ctx.mozImageSmoothingEnabled = false;
+    this.ctx.imageSmoothingEnabled = false;
 
-    const imgData = tempCtx.createImageData(size, size);
-    let pixelIndex = 0;
+    this.canvas.addEventListener('mousedown', (event) => {
+      this.mouse(event, onMouseDown);
+    });
 
-    for (let i = 0; i < size; i += 1) {
-      for (let j = 0; j < size; j += 1) {
-        const color = colorParser(jsonData[i][j]);
-        for (let colorPartIndex = 0; colorPartIndex < 4; colorPartIndex += 1) {
-          imgData.data[pixelIndex + colorPartIndex] = color[colorPartIndex];
-        }
-        pixelIndex += 4;
+    this.state = state;
+    this.syncState();
+    this.state.subscribe(() => {
+      this.syncState();
+    });
+  }
+
+  syncState() {
+    this.scaleX = this.canvas.width / this.state.picture.width;
+    this.scaleY = this.canvas.height / this.state.picture.height;
+    for (let y = 0; y < this.state.picture.height; y += 1) {
+      for (let x = 0; x < this.state.picture.width; x += 1) {
+        this.ctx.fillStyle = this.state.picture.pixel(x, y);
+        //console.log(this.ctx.fillStyle);
+        this.ctx.fillRect(
+          x * this.scaleX,
+          y * this.scaleY,
+          this.scaleX,
+          this.scaleY,
+        );
       }
     }
-
-    tempCtx.putImageData(imgData, 0, 0);
-    ctx.drawImage(tempCanvas, 0, 0, canvasSize, canvasSize);
-  }
-   */
-
-  function draw4x4() {
-    clearCanvas();
-    //drawMatrix(4, data4x4, parseColorFromHex);
   }
 
-  function draw32x32() {
-    clearCanvas();
-    //drawMatrix(32, data32x32);
+  pointerPosition(downEvent) {
+    const rect = this.canvas.getBoundingClientRect();
+    return {
+      x: Math.floor((downEvent.clientX - rect.left) / this.scaleX),
+      y: Math.floor((downEvent.clientY - rect.top) / this.scaleY),
+    };
   }
 
-  function draw64x64() {
-    clearCanvas();
-    //drawMatrix(32, data32x32);
+  mouse(downEvent, onDown) {
+    if (downEvent.button !== 0) {
+      return;
+    }
+
+    let pos = this.pointerPosition(downEvent);
+    const onMove = onDown(pos);
+    if (!onMove) {
+      return;
+    }
+
+    const move = (moveEvent) => {
+      if (moveEvent.buttons === 0) {
+        this.canvas.removeEventListener('mousemove', move);
+      } else {
+        const newPos = this.pointerPosition(moveEvent);
+        if (newPos.x === pos.x && newPos.y === pos.y) {
+          return;
+        }
+        pos = newPos;
+        onMove(newPos);
+      }
+    };
+    this.canvas.addEventListener('mousemove', move);
+  }
+}
+
+class State {
+  constructor(tool, color, previousColor, picture) {
+    this.tool = tool;
+    this.color = color;
+    this.previousColor = previousColor;
+    this.picture = picture;
+    this.listeners = [];
   }
 
-  const btn4x4 = document.getElementById('btn_4x4');
-  const btn32x32 = document.getElementById('btn_32x32');
-  const btn64x64 = document.getElementById('btn_64x64');
+  subscribe(listener) {
+    this.listeners.push(listener);
+  }
 
-  btn4x4.addEventListener('click', draw4x4);
-  btn32x32.addEventListener('click', draw32x32);
-  btn64x64.addEventListener('click', draw64x64);
+  notifyListeners() {
+    for (let i = 0; i < this.listeners.length; i += 1) {
+      this.listeners[i]();
+    }
+  }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const state = new State('draw', '#ff0000', '#ff0000', null);
+
+  const reset = (size) => {
+    state.picture = Picture.empty(size, size, '#ffffff');
+    state.notifyListeners();
+  };
+
+  const resetButtons = [
+    document.getElementById('btn_4x4'),
+    document.getElementById('btn_32x32'),
+    document.getElementById('btn_64x64'),
+  ];
+  resetButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      reset(Number(btn.getAttribute("data-size")));
+    });
+  });
+  reset(
+    Number(resetButtons[0].getAttribute("data-size"))
+  );
+
+
+  const tools = {
+    draw: (pos, state) => {
+      function drawPixel(p, state) {
+        const pixels = [{x: p.x, y: p.y, color: state.color}];
+        state.picture.draw(pixels);
+        state.notifyListeners();
+      }
+
+      drawPixel(pos, state);
+      return drawPixel;
+    },
+  };
+
+  const mouseDown = (pos) => {
+    const tool = tools[state.tool];
+    const onMove = tool(pos, state);
+    if (onMove) {
+      return (newPos) => onMove(newPos, state);
+    }
+    return null;
+  };
+
+  const canvas = new Canvas(
+    document.getElementById('canvas'),
+    state,
+    mouseDown);
+
+  const switchColor = document.getElementById('switch-color');
+  switchColor.addEventListener('change', () => {
+    state.previousColor = state.color;
+    state.color = switchColor.value;
+    state.notifyListeners();
+  });
+  state.subscribe(() => {
+    switchColor.value = state.color;
+  });
+
+  const prevColor = document.getElementById('prev-color');
+  const prevColorIcon = prevColor.getElementsByClassName(
+    'prev-color-icon')[0];
+  prevColor.addEventListener('click', () => {
+    state.previousColor = state.color;
+    state.color = prevColorIcon.backgroundColor;
+    state.notifyListeners();
+  });
+  state.subscribe(() => {
+    prevColorIcon.style.backgroundColor = state.previousColor;
+  });
+
+  state.notifyListeners();
 });
