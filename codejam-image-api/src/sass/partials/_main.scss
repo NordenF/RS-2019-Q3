@@ -1,0 +1,19 @@
+.main {
+  min-height: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-colors {
+  margin-top: 30px;
+}
+
+.work-area {
+  display: flex;
+  justify-content: center;
+}

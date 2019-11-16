@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CodeJam — Pallete</title>
+  <link rel="stylesheet" href="bundle.css">
+</head>
+<body>
+<header class="header">
+  <div class="header__nav-btn">
+    <div class="icon nav-icon"></div>
+  </div>
+  <h1 class="header__caption">CodeJam — Pallete</h1>
+  <div class="header__menu-btn">
+    <div class="menu-icon"></div>
+  </div>
+</header>
+<div class="content">
+  <main class="main">
+    <div class="main__left">
+      <div class="panel panel-tools">
+        <div class="btn" id="paint-bucket" data-hotkey-code="KeyB">
+          <div class="btn__icon-wrapper">
+            <div class="paint-bucket-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Paint bucket
+          </button>
+        </div>
+        <div class="btn" id="choose-color" data-hotkey-code="KeyC">
+          <div class="btn__icon-wrapper">
+            <div class="choose-color-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Choose color
+          </button>
+        </div>
+        <div class="btn active" id="pencil" data-hotkey-code="KeyP">
+          <div class="btn__icon-wrapper">
+            <div class="pencil-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Pencil
+          </button>
+        </div>
+        <hr class="delimiter">
+        <div class="btn disabled">
+          <div class="btn__icon-wrapper">
+            <div class="move-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Move
+          </button>
+        </div>
+        <div class="btn disabled">
+          <div class="btn__icon-wrapper">
+            <div class="transform-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Transform
+          </button>
+        </div>
+      </div>
+      <div class="panel panel-colors">
+        <div class="btn">
+          <label class="color-picker">
+            <input class="color-picker__control" type="color" id="switch-color" />
+            <span class="color-picker__label">Current</span>
+          </label>
+        </div>
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" id="prev-color" disabled />
+            <span class="color-picker__label">Prev</span>
+          </label>
+        </div>
+        <hr class="delimiter">
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" value="#ff0000" disabled />
+            <span class="color-picker__label">Red</span>
+          </label>
+        </div>
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" value="#00ff00" disabled />
+            <span class="color-picker__label">Green</span>
+          </label>
+        </div>
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" value="#0000ff" disabled />
+            <span class="color-picker__label">Blue</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="work-area">
+      <canvas id="canvas"></canvas>
+    </div>
+    <div class="main__column">
+      <div class="panel panel-switch">
+        <div class="btn center" data-size="4">
+          <button class="btn__caption">
+            Reset 4x4
+          </button>
+        </div>
+        <div class="btn center" data-size="8">
+          <button class="btn__caption">
+            Reset 8x8
+          </button>
+        </div>
+        <div class="btn center" data-size="16">
+          <button class="btn__caption">
+            Reset 16x16
+          </button>
+        </div>
+        <div class="btn center" data-size="32">
+          <button class="btn__caption">
+            Reset 32x32
+          </button>
+        </div>
+        <div class="btn center" data-size="64">
+          <button class="btn__caption">
+            Reset 64x64
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="bundle.js"></script>
+</body>
+</html>
