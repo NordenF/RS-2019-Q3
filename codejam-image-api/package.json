@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "test": "mocha test.js",
-    "lint": "eslint **/*.js --ignore-pattern node_modules/ --ignore-pattern dist/"
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/ --ignore-pattern dist/"
   },
   "repository": {
     "type": "git",

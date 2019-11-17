@@ -64,38 +64,49 @@
       <div class="panel panel-colors">
         <div class="btn">
           <label class="color-picker">
-            <input class="color-picker__control" type="color" id="switch-color" />
+            <input class="color-picker__control" type="color" id="switch-color"/>
             <span class="color-picker__label">Current</span>
           </label>
         </div>
         <div class="btn">
           <label class="color-picker clickable">
-            <input class="color-picker__control" type="color" id="prev-color" disabled />
+            <input class="color-picker__control" type="color" id="prev-color" disabled/>
             <span class="color-picker__label">Prev</span>
           </label>
         </div>
         <hr class="delimiter">
         <div class="btn">
           <label class="color-picker clickable">
-            <input class="color-picker__control" type="color" value="#ff0000" disabled />
+            <input class="color-picker__control" type="color" value="#ff0000" disabled/>
             <span class="color-picker__label">Red</span>
           </label>
         </div>
         <div class="btn">
           <label class="color-picker clickable">
-            <input class="color-picker__control" type="color" value="#00ff00" disabled />
+            <input class="color-picker__control" type="color" value="#00ff00" disabled/>
             <span class="color-picker__label">Green</span>
           </label>
         </div>
         <div class="btn">
           <label class="color-picker clickable">
-            <input class="color-picker__control" type="color" value="#0000ff" disabled />
+            <input class="color-picker__control" type="color" value="#0000ff" disabled/>
             <span class="color-picker__label">Blue</span>
           </label>
         </div>
       </div>
     </div>
     <div class="work-area">
+      <div class="image-panel">
+        <button class="image-panel__load-btn" id="load_btn">
+          Load
+        </button>
+        <label class="image-panel__city-input-label">
+          <input class="image-panel__city-input" id="city_input">
+        </label>
+        <button class="image-panel__bw-btn" id="bw_btn">
+          B&W
+        </button>
+      </div>
       <canvas id="canvas"></canvas>
     </div>
     <div class="main__column">
@@ -123,6 +134,13 @@
         <div class="btn center" data-size="64">
           <button class="btn__caption">
             Reset 64x64
+          </button>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="btn center">
+          <button class="btn__caption" id="remove_image">
+            Remove image
           </button>
         </div>
       </div>

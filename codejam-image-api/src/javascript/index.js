@@ -1,19 +1,43 @@
 require('../sass/styles.scss');
 // eslint-disable-next-line import/no-webpack-loader-syntax,import/no-unresolved
 require('file-loader?name=[name].[ext]!../index.html');
-const { Canvas } = require('./canvas');
-const { Picture } = require('./picture');
+const {Canvas} = require('./canvas');
+const {Picture} = require('./picture');
 const utils = require('./utils');
 
 class State {
   constructor(config) {
     const defaults = this.constructor.getDefauls();
-    Object.assign(this, defaults, config);
-    if (this.picture.constructor.name !== 'Picture') {
-      this.picture = new Picture(
-        config.picture.width, config.picture.height, config.picture.pixels,
-      );
+    Object.assign(this, defaults);
+    if (config) {
+      Object.keys(config).forEach((key) => {
+        let picture = null;
+        let image = null;
+        switch (key) {
+          case 'picture':
+            picture = config[key];
+            if (picture) {
+              this.picture = picture.constructor.name === 'Picture'
+                ? picture
+                : new Picture(config.picture.width, config.picture.height, config.picture.pixels);
+            }
+            break;
+          case 'image':
+            if (config[key]) {
+              image = new Image();
+              image.onload = () => {
+                this.image = image;
+                this.notifyListeners();
+              };
+              image.src = config[key];
+            }
+            break;
+          default:
+            this[key] = config[key];
+        }
+      });
     }
+    this.image = null;
     this.listeners = [];
   }
 
@@ -23,17 +47,34 @@ class State {
       previousTool: 'pencil',
       color: '#006400', // Darkgreen.
       previousColor: '#ffffff',
-      picture: Picture.empty(4, 4, '#ffffff'),
+      picture: Picture.empty(4, 4, null),
+      city: '',
+      image: null,
     };
   }
 
   getConfig() {
+    let image = null;
+    if (this.image) {
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext("2d");
+
+      tempCanvas.width = this.image.width;
+      tempCanvas.height = this.image.height;
+
+      tempCtx.drawImage(this.image, 0, 0, this.image.width, this.image.height);
+
+      image = tempCanvas.toDataURL("image/png");
+    }
+
     return {
       tool: this.tool,
       previousTool: this.previousTool,
       color: this.color,
       previousColor: this.previousColor,
       picture: this.picture,
+      city: this.city,
+      image,
     };
   }
 
@@ -45,6 +86,11 @@ class State {
     for (let i = 0; i < this.listeners.length; i += 1) {
       this.listeners[i]();
     }
+  }
+
+  setImage(image) {
+    this.image = image;
+    this.notifyListeners();
   }
 
   setNewTool(tool) {
@@ -65,9 +111,20 @@ class State {
   }
 
   reset(size) {
+    const {image} = this;
     Object.assign(this, this.constructor.getDefauls());
-    this.picture = Picture.empty(size, size, '#ffffff');
+    this.picture = Picture.empty(size, size, null);
+    this.image = image;
     this.notifyListeners();
+  }
+
+  removeImage() {
+    this.image = null;
+    this.notifyListeners();
+  }
+
+  setCanvas(canvas) {
+    this.canvas = canvas;
   }
 }
 
@@ -92,12 +149,13 @@ const around = [
 
 const tools = {
   'choose-color': (pos, state) => {
-    state.setNewColor(state.picture.pixel(pos.x, pos.y));
+    state.setNewColor(state.canvas.getPyxel(pos.pixelX, pos.pixelY));
     state.setNewTool(state.previousTool);
     return null;
   },
   pencil: (pos, state) => {
     let prevPos = pos;
+
     function drawPixel(p, st) {
       const pixels = utils.linePixels(prevPos, p);
 
@@ -144,6 +202,29 @@ const tools = {
   },
 };
 
+function loadAndSetImage(city, state) {
+  const unsplashAccessKey = '6afe374906d700472e3a0fc5c79c6671edef4e13328d31796b751bb9e77edb0c';
+  const unsplashUrl = `https://api.unsplash.com/photos/random?query=town,${city}&client_id=${unsplashAccessKey}`;
+  fetch(unsplashUrl)
+    .then((response) => {
+      if (!response.ok) {
+        window.console.log('Error request image. Status:', response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (!data) {
+        return;
+      }
+
+      const image = new Image();
+      image.crossOrigin = 'Anonymous';
+      image.onload = () => {
+        state.setImage(image);
+      };
+      image.src = data.urls.small;
+    });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const stateConfig = JSON.parse(localStorage.getItem('pallete-state'));
@@ -163,6 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
       reset(Number(btn.getAttribute('data-size')));
     });
   }
+
+  document.getElementById('remove_image').addEventListener(
+    'click', () => {
+      state.removeImage();
+    },
+  );
 
   const toolsControls = document.querySelectorAll('.panel-tools .btn');
   for (let i = 0; i < toolsControls.length; i += 1) {
@@ -208,6 +295,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const loadBtn = document.getElementById('load_btn');
+  loadBtn.addEventListener('click', () => {
+    loadAndSetImage(state.city, state);
+  });
+  const cityInput = document.getElementById('city_input');
+  cityInput.addEventListener('change', () => {
+    state.city = cityInput.value;
+  });
+  state.subscribe(() => {
+    cityInput.value = state.city;
+  });
+
   const mouseDown = (pos) => {
     const tool = tools[state.tool];
     const onMove = tool(pos, state);
@@ -219,6 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const canvas = new Canvas(document.getElementById('canvas'), state);
   canvas.addMouseDownListener(mouseDown);
+  state.setCanvas(canvas);
 
   state.notifyListeners();
 });
