@@ -1,3 +1,5 @@
+const utils = require('./utils');
+
 class Canvas {
   constructor(canvasElement, state) {
     const canvasSize = 512;
@@ -35,7 +37,9 @@ class Canvas {
     if (!this.state.image) {
       return;
     }
-    const {image} = this.state;
+    const image = this.state.isGrayscale
+      ? this.state.imageGrayscale
+      : this.state.image;
 
     const canvasRatio = this.canvas.height / this.canvas.width;
     const imageRatio = image.height / image.width;
@@ -63,8 +67,12 @@ class Canvas {
     this.scaleY = this.canvas.height / this.state.picture.height;
     for (let y = 0; y < this.state.picture.height; y += 1) {
       for (let x = 0; x < this.state.picture.width; x += 1) {
-        const color = this.state.picture.pixel(x, y);
+        let color = this.state.picture.pixel(x, y);
         if (color) {
+          if (this.state.isGrayscale) {
+            color = utils.toGrayscaleColor(color);
+          }
+
           this.ctx.fillStyle = color;
           this.ctx.fillRect(
             x * this.scaleX,

@@ -26,8 +26,7 @@ class State {
             if (config[key]) {
               image = new Image();
               image.onload = () => {
-                this.image = image;
-                this.notifyListeners();
+                this.setImage(image);
               };
               image.src = config[key];
             }
@@ -37,7 +36,6 @@ class State {
         }
       });
     }
-    this.image = null;
     this.listeners = [];
   }
 
@@ -50,6 +48,7 @@ class State {
       picture: Picture.empty(4, 4, null),
       city: '',
       image: null,
+      isGrayscale: false,
     };
   }
 
@@ -75,6 +74,7 @@ class State {
       picture: this.picture,
       city: this.city,
       image,
+      isGrayscale: this.isGrayscale,
     };
   }
 
@@ -90,7 +90,15 @@ class State {
 
   setImage(image) {
     this.image = image;
-    this.notifyListeners();
+    if (image) {
+      utils.toGrayscaleImage(image, (imageGrayscale) => {
+        this.imageGrayscale = imageGrayscale;
+        this.notifyListeners();
+      });
+    } else {
+      this.imageGrayscale = null;
+      this.notifyListeners();
+    }
   }
 
   setNewTool(tool) {
@@ -114,17 +122,23 @@ class State {
     const {image} = this;
     Object.assign(this, this.constructor.getDefauls());
     this.picture = Picture.empty(size, size, null);
-    this.image = image;
+    this.setImage(image);
     this.notifyListeners();
   }
 
   removeImage() {
     this.image = null;
+    this.imageGrayscale = null;
     this.notifyListeners();
   }
 
   setCanvas(canvas) {
     this.canvas = canvas;
+  }
+
+  switchGrayscale() {
+    this.isGrayscale = !this.isGrayscale;
+    this.notifyListeners();
   }
 }
 
@@ -251,6 +265,22 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   );
 
+  const loadBtn = document.getElementById('load_btn');
+  loadBtn.addEventListener('click', () => {
+    loadAndSetImage(state.city, state);
+  });
+  const cityInput = document.getElementById('city_input');
+  cityInput.addEventListener('change', () => {
+    state.city = cityInput.value;
+  });
+  state.subscribe(() => {
+    cityInput.value = state.city;
+  });
+
+  document.getElementById('bw_btn').addEventListener('click', () => {
+    state.switchGrayscale();
+  });
+
   const toolsControls = document.querySelectorAll('.panel-tools .btn');
   for (let i = 0; i < toolsControls.length; i += 1) {
     const toolId = toolsControls[i].id;
@@ -262,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const hotKey = toolsControls[i].getAttribute('data-hotkey-code');
       if (hotKey) {
         document.addEventListener('keydown', (ev) => {
-          if (ev.code === hotKey) {
+          if (ev.code === hotKey && ev.target !== cityInput) {
             state.setNewTool(toolId);
           }
         });
@@ -295,16 +325,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const loadBtn = document.getElementById('load_btn');
-  loadBtn.addEventListener('click', () => {
-    loadAndSetImage(state.city, state);
-  });
-  const cityInput = document.getElementById('city_input');
-  cityInput.addEventListener('change', () => {
-    state.city = cityInput.value;
-  });
+  const panelColors = document.querySelector('.panel-colors');
   state.subscribe(() => {
-    cityInput.value = state.city;
+    panelColors.classList.toggle('grayscale', state.isGrayscale);
   });
 
   const mouseDown = (pos) => {
