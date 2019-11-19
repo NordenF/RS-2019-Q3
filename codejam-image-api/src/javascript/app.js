@@ -48,7 +48,7 @@ class App {
     });
   }
 
-  static fromJSON(jsonStr) {
+  static async fromJSON(jsonStr) {
     let imageSrc = null;
     let state;
     try {
@@ -70,18 +70,12 @@ class App {
       state = null;
     }
 
-    if (imageSrc) {
-      return loadImage(imageSrc)
-        .then((image) => {
-          state.image = image;
-          return convertImage(image);
-        })
-        .then((imageGrayscale) => {
-          state.imageGrayscale = imageGrayscale;
-          return new App(state);
-        });
+    if (state && imageSrc) {
+      state.image = await loadImage(imageSrc);
+      state.imageGrayscale = await convertImage(state.image);
     }
-    return Promise.resolve(new App(state));
+
+    return new App(state);
   }
 
   subscribe(listener) {
@@ -94,13 +88,10 @@ class App {
     }
   }
 
-  setImage(image) {
+  async setImage(image) {
     this.image = image;
-    return (image ? convertImage(image) : Promise.resolve(null))
-      .then((imageGrayscale) => {
-        this.imageGrayscale = imageGrayscale;
-        this.notifyListeners();
-      });
+    this.imageGrayscale = image ? (await convertImage(image)) : null;
+    this.notifyListeners();
   }
 
   clearPicture() {
@@ -140,10 +131,10 @@ class App {
     this.notifyListeners();
   }
 
-  loadImageFromUnsplash() {
-    return requestImageSrcFromUnsplash(this.city)
-      .then((url) => loadImage(url))
-      .then((image) => this.setImage(image));
+  async loadImageFromUnsplash() {
+    const src = await requestImageSrcFromUnsplash(this.city);
+    const image = await loadImage(src);
+    await this.setImage(image);
   }
 
   draw(pixelsToDraw) {

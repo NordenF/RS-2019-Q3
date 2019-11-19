@@ -1,29 +1,28 @@
+const { loadImage } = require('./utils');
+
 // Convert image to grayscale.
 
-function convertImage(image) {
-  return new Promise((resolve) => {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = image.width;
-    canvas.height = image.height;
-    ctx.drawImage(image, 0, 0);
-    const imgPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    for (let y = 0; y < imgPixels.height; y += 1) {
-      for (let x = 0; x < imgPixels.width; x += 1) {
-        const i = (y * 4) * imgPixels.width + x * 4;
-        const avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
-        imgPixels.data[i] = avg;
-        imgPixels.data[i + 1] = avg;
-        imgPixels.data[i + 2] = avg;
-      }
+async function convertImage(image) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = image.width;
+  canvas.height = image.height;
+  ctx.drawImage(image, 0, 0);
+  const imgPixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  for (let y = 0; y < imgPixels.height; y += 1) {
+    for (let x = 0; x < imgPixels.width; x += 1) {
+      const i = (y * 4) * imgPixels.width + x * 4;
+      const avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
+      imgPixels.data[i] = avg;
+      imgPixels.data[i + 1] = avg;
+      imgPixels.data[i + 2] = avg;
     }
-    ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
-    const imageGrayscale = new Image();
-    imageGrayscale.src = canvas.toDataURL();
-    imageGrayscale.onload = () => {
-      resolve(imageGrayscale);
-    };
-  });
+  }
+
+  ctx.putImageData(imgPixels, 0, 0, 0, 0,
+    imgPixels.width, imgPixels.height);
+
+  return loadImage(canvas.toDataURL());
 }
 
 function convertPixel(color) {
