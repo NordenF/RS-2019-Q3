@@ -1,7 +1,7 @@
-# Task [Codejam Palette](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-2/codejam-palette/codejam-palette_en.md) for RSSchool
+# Task [Codejam-image-api](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-2/codejam-image-api/codejam-image-api_ru.md) for RSSchool
 
 ## Demo
-[http://codejam-image-api.nordenf.surge.sh/](http://codejam-image-api.nordenf.surge.sh/)
+[https://codejam-image-api-nordenf.netlify.com/](https://codejam-image-api-nordenf.netlify.com/)
 
 ## How to build
 

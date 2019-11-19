@@ -30,9 +30,12 @@ $header-background-color: white;
   margin-right: 24px;
 }
 
+.header__user-info {
+  margin-left: auto;
+}
+
 .header__menu-btn {
   @extend %header__btn;
-  margin-left: auto;
 }
 
 .nav-icon {

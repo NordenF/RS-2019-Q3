@@ -1,9 +1,11 @@
 const chai = require('chai');
 const mocha = require('mocha');
 const itParam = require('mocha-param');
-const { linePixels } = require('./src/javascript/utils.js');
 
-mocha.describe('Codjam pallete tests', () => {
+const { linePixels } = require('./src/javascript/bresenham');
+const { Picture } = require('./src/javascript/picture');
+
+mocha.describe('Codjam tests', () => {
   itParam(
     'linePixels should correctly construct line with Bresenham-algorithm',
     [
@@ -48,6 +50,33 @@ mocha.describe('Codjam pallete tests', () => {
 
       // Then:
       chai.expect(expectedPixels).to.eql(resultPixels);
+    },
+  );
+
+  mocha.it(
+    'Picture works correctrly with view port',
+    () => {
+      // Given:
+      const p = Picture.empty(4, 4, {
+        x: 1, y: 1, width: 2, height: 2,
+      });
+
+      // When:
+      p.draw([
+        { x: 0, y: 0, color: '#ff0000' },
+        { x: 1, y: 0, color: '#00ff00' },
+        { x: 0, y: 1, color: '#0000ff' },
+        { x: 1, y: 1, color: '#0f0f0f' },
+      ]);
+
+      // Then:
+      chai.assert.equal('#ff0000', p.pixel(0, 0));
+      chai.assert.equal('#00ff00', p.pixel(1, 0));
+      chai.assert.equal('#0000ff', p.pixel(0, 1));
+      chai.assert.equal('#0f0f0f', p.pixel(1, 1));
+
+      chai.assert.equal(2, p.width);
+      chai.assert.equal(2, p.height);
     },
   );
 });
