@@ -1,5 +1,6 @@
 require('babel-polyfill');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const sass = require('sass');
 
 // Webpack uses this to work with directories
@@ -101,5 +102,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'bundle.css',
     }),
+    new CopyPlugin([
+      { from: './src/index.html', to: 'index.html' },
+    ]),
   ],
 };
