@@ -15,8 +15,7 @@ function bresenham(x0, y0, x1, y1) {
     }
     return resultPixels;
   }
-  let error = 0;
-  const deltaerr = deltay;
+  let inaccuracy = 0;
   let y = y0;
   let diry = y1 - y0;
   if (diry > 0) {
@@ -31,10 +30,10 @@ function bresenham(x0, y0, x1, y1) {
     resultPixels.push({
       x, y,
     });
-    error += deltaerr;
-    if (2 * error >= deltax) {
+    inaccuracy += deltay;
+    if (2 * inaccuracy >= deltax) {
       y += diry;
-      error -= deltax;
+      inaccuracy -= deltax;
     }
   }
   return resultPixels;

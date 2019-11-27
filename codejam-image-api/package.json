@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "test": "mocha test.js",
-    "lint": "eslint '**/*.js' --ignore-pattern node_modules/ --ignore-pattern dist/"
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/ --ignore-pattern dist/",
+    "lint-fix": "eslint '**/*.js' --ignore-pattern node_modules/ --ignore-pattern dist/ --fix"
   },
   "repository": {
     "type": "git",
@@ -28,9 +29,6 @@
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^1.7.0",
     "file-loader": "^4.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "mocha-param": "^2.0.0",

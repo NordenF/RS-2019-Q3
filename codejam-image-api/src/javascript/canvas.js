@@ -1,8 +1,7 @@
 const grayscale = require('./grayscale');
 
 class Canvas {
-  constructor(canvasElement) {
-    const canvasSize = 512;
+  constructor(canvasElement, canvasSize) {
     this.canvas = canvasElement;
     this.canvas.width = canvasSize;
     this.canvas.height = canvasSize;
@@ -10,6 +9,14 @@ class Canvas {
     this.ctx.webkitImageSmoothingEnabled = false;
     this.ctx.mozImageSmoothingEnabled = false;
     this.ctx.imageSmoothingEnabled = false;
+    this.recalculateRect();
+    this.canvas.addEventListener('mousemove', (ev) => {
+      this.mouseMove(ev);
+    });
+  }
+
+  recalculateRect() {
+    this.canvasRect = this.canvas.getBoundingClientRect();
   }
 
   addMouseDownListener(onMouseDown) {
@@ -81,7 +88,7 @@ class Canvas {
   }
 
   pointerPosition(downEvent) {
-    const rect = this.canvas.getBoundingClientRect();
+    const rect = this.canvasRect;
     const pixelX = downEvent.clientX - rect.left;
     const pixelY = downEvent.clientY - rect.top;
 
@@ -98,25 +105,29 @@ class Canvas {
       return;
     }
 
-    let pos = this.pointerPosition(downEvent);
-    const onMove = onDown(pos);
-    if (!onMove) {
+    this.mousePos = this.pointerPosition(downEvent);
+    this.onMove = onDown(this.mousePos);
+    if (!this.onMove) {
+      return;
+    }
+    this.listenMoving = true;
+  }
+
+  mouseMove(moveEvent) {
+    if (!this.listenMoving) {
       return;
     }
 
-    const move = (moveEvent) => {
-      if (moveEvent.buttons === 0) {
-        this.canvas.removeEventListener('mousemove', move);
-      } else {
-        const newPos = this.pointerPosition(moveEvent);
-        if (newPos.x === pos.x && newPos.y === pos.y) {
-          return;
-        }
-        pos = newPos;
-        onMove(newPos);
+    if (moveEvent.buttons === 0) {
+      this.listenMoving = false;
+    } else {
+      const newPos = this.pointerPosition(moveEvent);
+      if (newPos.x === this.mousePos.x && newPos.y === this.mousePos.y) {
+        return;
       }
-    };
-    this.canvas.addEventListener('mousemove', move);
+      this.mousePos = newPos;
+      this.onMove(newPos);
+    }
   }
 }
 

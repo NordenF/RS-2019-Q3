@@ -3,6 +3,8 @@ const { App } = require('./app');
 const { fill } = require('./fill');
 const { pencil } = require('./pencil');
 
+const canvasSize = 512;
+
 async function init() {
   const storedState = localStorage.getItem('pixel-editor');
   const app = await App.fromJSON(storedState);
@@ -109,7 +111,7 @@ async function init() {
     }
   }
 
-  const canvas = new Canvas(document.getElementById('canvas'));
+  const canvas = new Canvas(document.getElementById('canvas'), canvasSize);
   canvas.addMouseDownListener((pos) => {
     if (app.tool === 'choose-color') {
       app.setColor(canvas.getPyxel(pos.pixelX, pos.pixelY));
@@ -130,6 +132,14 @@ async function init() {
   });
   app.subscribe(() => {
     canvas.draw(app.image, app.imageGrayscale, app.picture, app.isGrayscale);
+  });
+
+  window.addEventListener('scroll', () => {
+    canvas.recalculateRect();
+  });
+
+  window.addEventListener('resize', () => {
+    canvas.recalculateRect();
   });
 
   return app;
