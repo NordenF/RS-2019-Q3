@@ -4,21 +4,30 @@
 .reveal h4,
 .reveal h5,
 .reveal h6 {
-  text-transform: none;
+    text-transform: none;
 }
 
-.reveal section img {
-  border: none;
+.reveal pre code {
+    max-height: none;
 }
 
 .columns {
-  display: flex;
+    display: flex;
 }
 
 .columns > *:not(:last-child) {
-  margin-right: 50px;
+    margin-right: 50px;
 }
 
 .column {
-  width: 50%;
+    width: 50%;
+}
+
+section .sample img {
+    border: solid 1px gray;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.align-left {
+    text-align: left;
 }

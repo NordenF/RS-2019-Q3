@@ -52,19 +52,122 @@
             </aside>
         </section>
         <section>
-            <h2>Base sample</h2>
-            <p>Some text</p>
-            <div class="sample" data-file="illustrations/base.svg"></div>
+            <section>
+                <h2>Basic structure</h2>
+                <div class="sample" data-file="samples/basic.svg"
+                     data-caption="Default size:<br>width: 300px,<br>height: 150px."></div>
+            </section>
         </section>
         <section>
-            <h2>Complex sample</h2>
-            <p>Some text</p>
-            <div class="sample" data-file="illustrations/FusionintheSun.svg"></div>
+            <section>
+                <h2>Size & scale</h2>
+                <p>viewBox</p>
+                <div class="sample" data-file="samples/size-scale-1.svg"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>viewBox & viewport</p>
+                <div class="sample" data-file="samples/size-scale-2.svg" data-caption="209x201"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>Scale viewBox → viewport</p>
+                <div class="sample" data-file="samples/size-scale-3.svg"
+                     data-caption="Image size (outher): 418x402<br>ViewBox-size (for internal calculations in SVG): 209x201"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>Ratio is preserved by default</p>
+                <div class="sample" data-file="samples/size-scale-4.svg"
+                     data-caption="Image size (outher): 500x200"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>Ratio is preserved by default</p>
+                <div class="sample" data-file="samples/size-scale-5.svg"
+                     data-caption="Image size (outher): 200x500"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>Change ratio</p>
+                <div class="sample" data-file="samples/size-scale-6.svg"
+                     data-caption="preserveAspectRatio=&quot;none&quot;"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>Alignment tuning</p>
+                <div class="sample" data-file="samples/size-scale-7.svg"
+                     data-caption="preserveAspectRatio=&quot;xMinYMid&quot;"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>Alignment tuning</p>
+                <div class="sample" data-file="samples/size-scale-8.svg"
+                     data-caption="preserveAspectRatio=&quot;xMaxYMid&quot;"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>Alignment tuning</p>
+                <div class="sample" data-file="samples/size-scale-9.svg"
+                     data-caption="preserveAspectRatio=&quot;xMidYMin slice&quot;"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>Alignment tuning</p>
+                <div class="sample" data-file="samples/size-scale-10.svg"
+                     data-caption="preserveAspectRatio=&quot;xMidYMax slice&quot;"></div>
+            </section>
+            <section>
+                <h2>Size & scale</h2>
+                <p>Overview preserveAspectRatio</p>
+                <p class="align-left">
+                    <strong>preserveAspectRatio="none"<br>
+                        preserveAspectRatio="<em>&lt;align&gt; [&lt;meetOrSlice&gt;]</em>"</strong>
+                </p>
+                <p class="align-left">
+                    <strong><em>&lt;align&gt;:</em></strong> [xMinYMin, xMidYMin, xMaxYMin, xMinYMid,<br>
+                    xMidYMid, xMaxYMid, xMinYMax, xMidYMax, xMaxYMax]
+                </p>
+                <p class="align-left">
+                    <strong><em>&lt;meetOrSlice&gt;:</em></strong> [meet, slice]
+                </p>
+                <div class="align-left">
+                    Default:<br>
+                    <strong>preserveAspectRatio="xMidYMid meet"</strong>
+                </div>
+            </section>
         </section>
         <section>
-            <h2>Another sample</h2>
-            <p>Some text</p>
-            <div class="sample" data-file="illustrations/stelo.svg"></div>
+            <section>
+                <h2>Figures</h2>
+                <p>Line</p>
+                <div class="sample" data-file="samples/figures-line.svg"></div>
+            </section>
+            <section>
+                <h2>Figures</h2>
+                <p>Rectangle</p>
+                <div class="sample" data-file="samples/figures-rect.svg"></div>
+            </section>
+            <section>
+                <h2>Figures</h2>
+                <p>Circle</p>
+                <div class="sample" data-file="samples/figures-circle.svg"></div>
+            </section>
+            <section>
+                <h2>Figures</h2>
+                <p>Ellipse</p>
+                <div class="sample" data-file="samples/figures-ellipse.svg"></div>
+            </section>
+            <section>
+                <h2>Figures</h2>
+                <p>Polyline</p>
+                <div class="sample" data-file="samples/figures-polyline.svg"></div>
+            </section>
+            <section>
+                <h2>Figures</h2>
+                <p>Polygon</p>
+                <div class="sample" data-file="samples/figures-polygon.svg"></div>
+            </section>
         </section>
     </div>
 </div>
@@ -77,7 +180,7 @@
         return await response.text();
     }
 
-    function initSample(sampleElement, fileContent) {
+    function initSample(sampleElement, fileContent, caption) {
         const code = document.createElement('code');
         code.textContent = fileContent;
         code.setAttribute('data-trim', 'data-trim');
@@ -89,8 +192,16 @@
         leftColumn.classList.add('column');
         const img = document.createElement('img');
         img.src = sampleElement.getAttribute('data-file');
+        const figure = document.createElement('figure');
+        figure.appendChild(img);
+        const captionText = sampleElement.getAttribute('data-caption');
+        if (captionText) {
+            const figcaption = document.createElement('figcaption');
+            figcaption.innerHTML = captionText;
+            figure.appendChild(figcaption);
+        }
         const rightColumn = document.createElement('div');
-        rightColumn.appendChild(img);
+        rightColumn.appendChild(figure);
         rightColumn.classList.add('column');
         sampleElement.classList.add('columns');
         sampleElement.appendChild(leftColumn);
@@ -143,6 +254,7 @@
                 Reveal.toggleHelp();
             },
         },
+        navigationMode: 'linear',
         width: '100%',
         height: '100%'
     });
