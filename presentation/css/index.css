@@ -19,8 +19,12 @@
     margin-right: 50px;
 }
 
-.column {
-    width: 50%;
+.column:first-child {
+    width: 60%;
+}
+
+.column:last-child {
+    width: 40%;
 }
 
 section .sample img {
