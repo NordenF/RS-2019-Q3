@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" baseProfile="full"
+     xmlns="http://www.w3.org/2000/svg"
+     width="550" height="550" viewBox="70 0 470 350">
+
+    <path d="M 200, 300    C 100, 100, 500, 100, 400, 300"
+          style="stroke:blue; stroke-width: 7; fill:none;" />
+
+    <!-- Helper lines and texts for this illustration: -->
+    <g style="stroke: red; stroke-width: 3;">
+        <line x1="200" y1="300" x2="100" y2="100" />
+        <line x1="400" y1="300" x2="500" y2="100" />
+    </g>
+    <g font-family="Arial" font-weight="bold" font-size="16">
+        <text x="150" y="30" fill="black">&lt;path d="M <tspan fill="blue">mx,my</tspan> C <tspan fill="red">x1,y1 x2,y2</tspan><tspan fill="blue"> x,y"</tspan>&gt;</text>
+        <g fill="blue"><text x="160" y="320">mx,my</text><text x="400" y="320">x,y</text></g>
+        <g fill="red"><text x="80" y="85">x1,y1</text><text x="485" y="85">x2,y2</text></g>
+    </g>
+</svg>

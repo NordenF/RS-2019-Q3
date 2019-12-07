@@ -41,7 +41,6 @@
                 <li>Current version 1.1, released in 2011.</li>
             </ul>
             <aside class="notes" data-markdown>
-                Note:
                 SVG is declarative markup language for describe scalable vector graphics.
 
                 * Open standard.
@@ -167,6 +166,60 @@
                 <h2>Figures</h2>
                 <p>Polygon</p>
                 <div class="sample" data-file="samples/figures-polygon.svg"></div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Path</h2>
+                <p>Most flexible SVG element for curves drawing.</p>
+                <aside class="notes" data-markdown>
+                    The element &lt;path&gt; is the most flexible SVG element for drawing open and closed curves.
+
+                    The &lt;path&gt; element has the attribute «d», inside of which there is list of commands.
+
+                    The commands define the trajectory and direction of the curly line.
+                </aside>
+            </section>
+            <section>
+                <h2>Path</h2>
+                <p>
+                    <strong>M</strong>oveto,
+                    <strong>l</strong>ineto,
+                    <strong>h</strong>orizontal lineto,
+                    <strong>v</strong>ertical lineto.<br>
+                    Uppercase — absolute, lowercase — relative. <strong>Z</strong> — close stroke.
+                </p>
+                <div class="sample" data-file="samples/path-1.svg"></div>
+            </section>
+            <section>
+                <h2>Path</h2>
+                <p>Elliptical <strong>a</strong>rc</p>
+                <div class="sample" data-file="samples/path-2.svg"></div>
+            </section>
+            <section>
+                <h2>Path</h2>
+                <p>
+                    Cubic Bezier <strong>c</strong>urve<br>
+                    mx=200, my=300, x1=100, y1=100, x2=500, y2=100, x=400, y=300
+                </p>
+                <div class="sample" data-file="samples/path-3.svg"></div>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Styling</h2>
+                <p>Properties as attributes of tags</p>
+                <div class="sample" data-file="samples/styling-1.svg"></div>
+            </section>
+            <section>
+                <h2>Styling</h2>
+                <p>Properties within style-attribute</p>
+                <div class="sample" data-file="samples/styling-2.svg"></div>
+            </section>
+            <section>
+                <h2>Styling</h2>
+                <p>Style sheet in element &lt;style&gt;</p>
+                <div class="sample" data-file="samples/styling-3.svg"></div>
             </section>
         </section>
     </div>
