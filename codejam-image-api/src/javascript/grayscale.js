@@ -2,7 +2,7 @@ const { loadImage } = require('./utils');
 
 // Convert image to grayscale.
 
-async function convertImage(image) {
+function convertImage(image) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = image.width;

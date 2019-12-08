@@ -49,31 +49,30 @@ class App {
   }
 
   static async fromJSON(jsonStr) {
-    let imageSrc = null;
     let state;
     try {
       state = JSON.parse(jsonStr, (key, valueStr) => {
-        if (!key || !valueStr) {
-          return valueStr;
+        if (key === 'picture' && valueStr) {
+          return Picture.fromJSON(valueStr);
         }
-        switch (key) {
-          case 'picture':
-            return Picture.fromJSON(valueStr);
-          case 'imageData':
-            imageSrc = valueStr;
-            return undefined;
-          default:
-            return valueStr;
-        }
+        return valueStr;
       });
     } catch (e) {
       state = null;
     }
 
-    if (state && imageSrc) {
-      state.image = await loadImage(imageSrc);
-      state.imageGrayscale = await convertImage(state.image);
+    if (!state) {
+      return new App();
     }
+
+    const imageSrc = state.imageData;
+    delete state.imageData;
+    if (!imageSrc) {
+      return new App(state);
+    }
+
+    state.image = await loadImage(imageSrc);
+    state.imageGrayscale = await convertImage(state.image);
 
     return new App(state);
   }
@@ -133,8 +132,10 @@ class App {
 
   async loadImageFromUnsplash() {
     const src = await requestImageSrcFromUnsplash(this.city);
-    const image = await loadImage(src);
-    await this.setImage(image);
+    if (src) {
+      const image = await loadImage(src);
+      await this.setImage(image);
+    }
   }
 
   draw(pixelsToDraw) {
