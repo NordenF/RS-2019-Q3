@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+     width="500" height="500" viewBox="0 0 120 120">
+    <!-- <style> ... </style> --><!-- Hide -->
+    <style>
+        .col-1 {
+        fill: #F35C78;
+        }
+        .col-2 {
+        fill: #E77D6D;
+        }
+        .col-3 {
+        fill: #D99B64;
+        }
+        .col-4 {
+        fill: #C8B357;
+        }
+        .col-5 {
+        fill: #B2CC49;
+        }
+    </style><!-- /Hide -->
+    <symbol id="house" viewBox="0 0 32 29"
+            preserveAspectRatio="xMidYMid slice">
+        <title>House</title>
+        <desc>House icon</desc>
+        <!-- Regarding own coordinate system (0 0 32 29)! -->
+        <path d="
+          M 32 18.451 l -16 -12.42 -16 12.42 v -5.064 l 16 -12.42 16 12.42 z
+          M 28 18 v 12 h -8 v -8 h -8 v 8 h -8 v -12 l 12 -9 z"/>
+    </symbol>                  <!-- Different viewports for each use: -->
+    <use href="#house" class="col-1" x="0" y="0" width="32" height="29"/>
+    <use href="#house" class="col-2" x="10" y="40" width="64" height="58"/>
+    <use href="#house" class="col-3" x="40" y="10" width="70" height="15"/>
+    <use href="#house" class="col-4" x="90" y="40" width="15" height="45"/>
+    <use href="#house" class="col-5" x="95" y="95" width="21" height="19"/><!-- Hide -->
+    <g stroke-dasharray="5,5" stroke="blue" stroke-width="1" fill="none" stroke-opacity="0.5">
+        <rect x="0" y="0" width="32" height="29"/>
+        <rect x="10" y="40" width="64" height="58" stroke="blue" stroke-width="1" fill="none"/>
+        <rect x="40" y="10" width="70" height="15" stroke="blue" stroke-width="1" fill="none"/>
+        <rect x="90" y="40" width="15" height="45" stroke="blue" stroke-width="1" fill="none"/>
+        <rect x="95" y="95" width="21" height="19" stroke="blue" stroke-width="1" fill="none"/>
+    </g>
+    <!-- /Hide -->
+</svg>

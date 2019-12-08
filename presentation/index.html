@@ -29,6 +29,11 @@
         <section>
             <h1>SVG</h1>
             <h2>Scalable Vector Graphics</h2>
+            <aside class="notes" data-markdown>
+                Hi!
+
+                My name is Alexander, and this is my presentation dedicated to SVG.
+            </aside>
         </section>
         <section>
             <h2>General info</h2>
@@ -38,83 +43,205 @@
                 <li>Developed by the W3C since 1999.</li>
                 <li>XML-based.</li>
                 <li>It is format for 2D-graphics. 3D is not supported.</li>
-                <li>Current version 1.1, released in 2011.</li>
+                <li>The current version 1.1, released in 2011.</li>
             </ul>
             <aside class="notes" data-markdown>
-                SVG is declarative markup language for describe scalable vector graphics.
+                And here is the first slide.
 
-                * Open standard.
-                * Developed by the World Wide Web Consortium (W3C) since 1999.
-                * XML-based.
-                * Format for 2D-graphics. 3D is not supported.
-                * Current version 1.1, released in 2011.
+                Several common things about SVG.
+
+                SVG means «Scalable Vector Graphics».
+
+                It is a markup language for describing graphics as a set of geometric primitives and styles applied to
+                them.
+
+                The SVG specification is an open standard developed by the World Wide Web Consortium since 1999.
+
+                SVG is based on XML, so SVG-file is XML-file.
+
+                It should be noted that SVG supports two-dimensional graphics. Three-dimensional graphics not supported.
+
+                Current version of SVG is 1.1, released in 2011.
+
+                The next version 2.0 is under development. The latest it's draft was released on 23 September 2019.
             </aside>
         </section>
         <section>
-            <section>
-                <h2>Basic structure</h2>
-                <div class="sample" data-file="samples/basic.svg"
-                     data-caption="Default size:<br>width: 300px,<br>height: 150px."></div>
-            </section>
+            <h2>Basic structure</h2>
+            <div class="sample" data-file="samples/basic.svg"
+                 data-caption="Default size:<br>width: 300px,<br>height: 150px."></div>
+            <aside class="notes" data-markdown>
+                Basic structure of SVG-document.
+
+                Like any xml document, an SVG document begins with the XML declaration.
+
+                After the declaration, the root SVG tag follows.
+
+                SVG-tag has two attributes which specify the SVG-version and XML-namespace.
+
+                Inside the root tag there may be a tag «title» similar to the corresponding tag in HTML. It is optional.
+                And «desc» is other optional tag.
+
+                And inside the root SVG-tag there are tags, which describe geometric primitives, that make up the image.
+
+                For example, I put a polygon tag here.
+
+                In this simple example we can see a problem. By default, browser displays an SVG image with sizes 300 by
+                150 pixels.
+                But it can be seen that some of the coordinates of the points of the polygon are outside these
+                boundaries.
+                Let's try to fix it.
+            </aside>
         </section>
         <section>
             <section>
                 <h2>Size & scale</h2>
                 <p>viewBox</p>
                 <div class="sample" data-file="samples/size-scale-1.svg"></div>
+                <aside class="notes" data-markdown>
+                    I added the «viewBox» attribute to the SVG root tag.
+
+                    ViewBox defines the coordinate space that will be used inside the svg document.
+
+                    For example, here the minimum values of x and y are zeros, and the maximum values for x is 209 and
+                    for y is 201.
+
+                    Usually, if the coordinates of a figure are within these limits, then the figure will be visible.
+
+                    For example, we see that our star is now fully visible.
+
+                    There is another problem. Now the SVG-object occupies on the page whole space provided to it.
+                    If you open this SVG in a separate tab of browser, the star will occupy the whole page.
+
+                    This can be fixed by setting the width and height of the SVG object.
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
                 <p>viewBox & viewport</p>
                 <div class="sample" data-file="samples/size-scale-2.svg" data-caption="209x201"></div>
+                <aside class="notes" data-markdown>
+                    Here I added the so-called «viewport».
+
+                    Viewport is a pair of attributes «width» and «height» in the root SVG-tag.
+
+                    They define outher size of the SVG-object.
+
+                    Here is the simplest case when the viewport is equal to the viewbox.
+
+                    So, the SVG-image occupies on the page an area with sizes exactly as was determined by width and
+                    height attributes.
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
                 <p>Scale viewBox → viewport</p>
                 <div class="sample" data-file="samples/size-scale-3.svg"
                      data-caption="Image size (outher): 334x322<br>ViewBox-size (for internal calculations in SVG): 209x201"></div>
+                <aside class="notes" data-markdown>
+                    The viewport can be either smaller or larger than the viewbox.
+
+                    For example, here I set the viewport more than the viewbox.
+
+                    The image is scaled accordingly.
+
+                    Please note that the internal coordinate system, which is set by the «viewBox», has remained
+                    unchanged.
+
+                    The coordinates of the visible points are still between 0 and 209 and between 0 and 201.
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
                 <p>Ratio is preserved by default</p>
                 <div class="sample" data-file="samples/size-scale-4.svg"
                      data-caption="Image size (outher): 500x200"></div>
+                <aside class="notes" data-markdown>
+                    The viewport-ratio (ratio of width and height) may differ from the ratio of viewBox.
+
+                    But by default the ratio of image will be preserved.
+
+                    During scaling, the margins are added automatically.
+
+                    I note again that I did not change the values of the points of the polygon.
+                    The internal coordinate system has remained unchanged.
+                    It is determined only by «viewBox».
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
                 <p>Ratio is preserved by default</p>
                 <div class="sample" data-file="samples/size-scale-5.svg"
                      data-caption="Image size (outher): 200x400"></div>
+                <aside class="notes" data-markdown>
+                    Yet another example of the ratio preserving.
+                    Now margins was automatically added on top and on bottom.
+
+                    But we can change this behavior.
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
                 <p>Change ratio</p>
                 <div class="sample" data-file="samples/size-scale-6.svg"
                      data-caption="preserveAspectRatio=&quot;none&quot;"></div>
+                <aside class="notes" data-markdown>
+                    We can set the attribute «preserveAspectRatio» in the root tag.
+
+                    If we set it to «none», then the viewBox will be resized to cover the viewPort.
+                    The image ratio will change, if it is necessary.
+
+                    But note again that the internal coordinate system has remained unchanged.
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
                 <p>Alignment tuning</p>
                 <div class="sample" data-file="samples/size-scale-7.svg"
                      data-caption="preserveAspectRatio=&quot;xMinYMid&quot;"></div>
+                <aside class="notes" data-markdown>
+                    The «preserveAspectRatio» attribute is actually a bit more complicated.
+
+                    It allows you to set the image alignment for those cases when the margins appear.
+
+                    Here I set it to the value «xMinYMid» for align to left.
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
                 <p>Alignment tuning</p>
                 <div class="sample" data-file="samples/size-scale-8.svg"
                      data-caption="preserveAspectRatio=&quot;xMaxYMid&quot;"></div>
+                <aside class="notes" data-markdown>
+                    Other example for align to right.
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
                 <p>Alignment tuning</p>
                 <div class="sample" data-file="samples/size-scale-9.svg"
                      data-caption="preserveAspectRatio=&quot;xMidYMin slice&quot;"></div>
+                <aside class="notes" data-markdown>
+                    By the attribute «preserveAspectRatio», in addition to alignment,
+                    we can specify also algorithm for matching «viewBox» on «viewPort».
+
+                    In all examples before, the default algorithm was used. The default has name «meet».
+                    The «meet»-algorithm ensures that the whole viewBox is placed inside the viewPort, so all points
+                    from inside viewBox are visible.
+
+                    And another possible value is «slice». Here is the example for «slice».
+                    The «slice» algorithm ensures that the viewPort fits in the viewBox.
+                    That is, it works in exactly the opposite way.
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
                 <p>Alignment tuning</p>
                 <div class="sample" data-file="samples/size-scale-10.svg"
                      data-caption="preserveAspectRatio=&quot;xMidYMax slice&quot;"></div>
+                <aside class="notes" data-markdown>
+                    Other example for «slice» with other alignment.
+                </aside>
             </section>
             <section>
                 <h2>Size & scale</h2>
@@ -134,38 +261,93 @@
                     Default:<br>
                     <strong>preserveAspectRatio="xMidYMid meet"</strong>
                 </div>
+                <aside class="notes" data-markdown>
+                    And here is an overview of all possible values of the attribute «preserveAspectRatio».
+                    Default value is «xMidYMid meet».
+                </aside>
             </section>
         </section>
         <section>
             <section>
-                <h2>Figures</h2>
+                <h2>Shapes</h2>
+                <aside class="notes" data-markdown>
+                    Let's go through the basic shapes.
+                </aside>
+            </section>
+            <section>
+                <h2>Shapes</h2>
                 <p>Line</p>
                 <div class="sample" data-file="samples/figures-line.svg"></div>
+                <aside class="notes" data-markdown>
+                    Here is line.
+
+                    It's simple. It is defined by coordinates of the start point and the coordinates of the end point.
+                </aside>
             </section>
             <section>
-                <h2>Figures</h2>
+                <h2>Shapes</h2>
                 <p>Rectangle</p>
                 <div class="sample" data-file="samples/figures-rect.svg"></div>
+                <aside class="notes" data-markdown>
+                    Here is rectangle.
+
+                    It is defined by coordinates of the top left angle and by sizes (width and height).
+                </aside>
             </section>
             <section>
-                <h2>Figures</h2>
+                <h2>Shapes</h2>
                 <p>Circle</p>
                 <div class="sample" data-file="samples/figures-circle.svg"></div>
+                <aside class="notes" data-markdown>
+                    Circle.
+
+                    It is defined by coordinates of the center and by the radius.
+                </aside>
             </section>
             <section>
-                <h2>Figures</h2>
+                <h2>Shapes</h2>
                 <p>Ellipse</p>
                 <div class="sample" data-file="samples/figures-ellipse.svg"></div>
+                <aside class="notes" data-markdown>
+                    Ellipse.
+
+                    An ellipse is similar to circle.
+
+                    The difference is that an ellipse has different radius for vertical and horizontal axis.
+                </aside>
             </section>
             <section>
-                <h2>Figures</h2>
+                <h2>Shapes</h2>
                 <p>Polyline</p>
                 <div class="sample" data-file="samples/figures-polyline.svg"></div>
+                <aside class="notes" data-markdown>
+                    Polyline.
+
+                    The «polyline» SVG element is an SVG basic shape that creates straight lines connecting several
+                    points.
+
+                    Typically a polyline is used to create open shapes as the last point doesn't have to be connected to
+                    the first point.
+
+                    The attribute «points» defines the list of points required to draw the polyline.
+
+                    Each point is a pair of x and y values.
+
+                    The commas are optional. You can place commas between x and y or not place them and use only spaces.
+                </aside>
             </section>
             <section>
-                <h2>Figures</h2>
+                <h2>Shapes</h2>
                 <p>Polygon</p>
                 <div class="sample" data-file="samples/figures-polygon.svg"></div>
+                <aside class="notes" data-markdown>
+                    Polygon.
+
+                    The «polygon» element is similar to «polyline».
+
+                    But, unlike «polyline», «polygon» defines a closed shape. The last point is connected to the first
+                    point.
+                </aside>
             </section>
         </section>
         <section>
@@ -173,11 +355,11 @@
                 <h2>Path</h2>
                 <p>Most flexible SVG element for curves drawing.</p>
                 <aside class="notes" data-markdown>
-                    The element &lt;path&gt; is the most flexible SVG element for drawing open and closed curves.
+                    Now let's go to the element «path».
 
-                    The &lt;path&gt; element has the attribute «d», inside of which there is list of commands.
+                    The element &lt;path&gt; is the most flexible SVG element for drawing open and closed lines.
 
-                    The commands define the trajectory and direction of the curly line.
+                    All the basic shapes can be created with a «path» element.
                 </aside>
             </section>
             <section>
@@ -190,11 +372,41 @@
                     Uppercase — absolute, lowercase — relative. <strong>Z</strong> — close stroke.
                 </p>
                 <div class="sample" data-file="samples/path-1.svg"></div>
+                <aside class="notes" data-markdown>
+                    The &lt;path&gt; element has the attribute «d», inside of which there is list of path-commands.
+
+                    The commands define the trajectory and direction of the line.
+
+                    Each path-command is composed of a command letter and numbers that represent the command parameters.
+
+                    On this slide we meet five commands.
+
+                    Moveto-command: move the pen to the specific coordinats without line drowing.
+
+                    If the command was specified with uppercase-letter, the coordinates are interpreted as absolute
+                    coordinates within viewBox.
+
+                    If the command was specified with lowercase-letter, the coordinates are interpreted relatively to
+                    the last point of the pen.
+
+                    «Lineto» is similar to «moveto» but with line drawing.
+
+                    «Horizontal lineto» required only x-parameter. The y-value of the pen remains unchanged.
+
+                    The «vertical lineto» works similarly but vertically.
+
+                    The command «Z» draws a straight line from the current position to the first point in the path.
+                </aside>
             </section>
             <section>
                 <h2>Path</h2>
                 <p>Elliptical <strong>a</strong>rc</p>
                 <div class="sample" data-file="samples/path-2.svg"></div>
+                <aside class="notes" data-markdown>
+                    Here there is the example of other path-command: elliptical arc.
+
+                    It's letter is «A». It's syntax is a bit more complicated. Read the documentation for details.
+                </aside>
             </section>
             <section>
                 <h2>Path</h2>
@@ -203,24 +415,224 @@
                     mx=200, my=300, x1=100, y1=100, x2=500, y2=100, x=400, y=300
                 </p>
                 <div class="sample" data-file="samples/path-3.svg"></div>
+                <aside class="notes" data-markdown>
+                    Yet another path-command is Cubic Bezier curve.
+
+                    It's letter is «C».
+
+                    This command draws a cubic Bezier curve from the current point to (x,y).
+
+                    It uses the point (x1,y1) as the control point at the beginning of the curve
+                    and the point (x2,y2) as the control point at the end of the curve.
+                </aside>
+            </section>
+            <section>
+                <h2>Path</h2>
+                <p>
+                    Other path-commands
+                </p>
+                <ul class="align-left">
+                    <li><strong>Q</strong>/<strong>q</strong> — quadratic Bezier curve</li>
+                    <li><strong>T</strong>/<strong>t</strong> — smooth quadratic Bezier curve</li>
+                </ul>
+                <p>
+                    Read documentation for details.
+                </p>
+                <aside class="notes" data-markdown>
+                    There are two more path-commands.
+
+                    There are also more options for other path-commands.
+
+                    Read documentation for details.
+                </aside>
             </section>
         </section>
         <section>
             <section>
                 <h2>Styling</h2>
+                <aside class="notes" data-markdown>
+                    Let's talk a bit about styling.
+                </aside>
+            </section>
+            <section>
+                <h2>Styling</h2>
                 <p>Properties as attributes of tags</p>
                 <div class="sample" data-file="samples/styling-1.svg"></div>
+                <aside class="notes" data-markdown>
+                    We can put different presentation attributes directly in shape-tags.
+
+                    For example, here is the rectangle, styled with three presentation attributes.
+
+                    The fill attribute specifies the background color of the shape.
+
+                    The stroke attribute specifies the border color of the shape.
+
+                    The stroke-width specifies the width of the border.
+                </aside>
             </section>
             <section>
                 <h2>Styling</h2>
                 <p>Properties within style-attribute</p>
                 <div class="sample" data-file="samples/styling-2.svg"></div>
+                <aside class="notes" data-markdown>
+                    The same presentation properties can be specified as properties within one string,
+                    which is the value to the attribute «style».
+
+                    For fun, here I added one more property: «transform».
+                </aside>
             </section>
             <section>
                 <h2>Styling</h2>
                 <p>Style sheet in element &lt;style&gt;</p>
                 <div class="sample" data-file="samples/styling-3.svg"></div>
+                <aside class="notes" data-markdown>
+                    Presentation properties can be specified by style sheet in the element «style», similar to ordinar
+                    cascade stylesheet for HTML.
+
+                    Here is an example.
+                </aside>
             </section>
+            <section>
+                <h2>Styling</h2>
+                <p>External style sheet</p>
+                <p>
+                    Possible in principle. But restricted in browsers for security reasons.
+                </p>
+                <aside class="notes" data-markdown>
+                    Finally, stylesheet can be moved to a separate file and included to SVG-document as an external
+                    resource.
+
+                    But using of external resources within SVG is restricted in browsers for security reasons.
+
+                    Therefore I will not touch this theme.
+                </aside>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Grouping</h2>
+                <p>
+                    Tag <strong>&lt;g&gt;</strong>
+                </p>
+                <aside class="notes" data-markdown>
+                    SVG-shapes can be grouped to structure a file in more convenient manner.
+                </aside>
+            </section>
+            <section>
+                <h2>Grouping</h2>
+                <div class="sample" data-file="samples/grouping-1.svg"></div>
+                <aside class="notes" data-markdown>
+                    This is simple example of grouping. There is two groups, marked with identifiers «to-sun» and
+                    «to-night».
+
+                    For grouping figures, the «g» tag serves.
+
+                    Grouping is needed for divide elements semantically and for maintaining a transparent document
+                    structure.
+                </aside>
+            </section>
+            <section>
+                <h2>Grouping</h2>
+                <div class="sample" data-file="samples/grouping-2.svg"></div>
+                <aside class="notes" data-markdown>
+                    Groupes are useful as containers with common styles for all elements in it.
+
+                    There are abilities to style, move, scale, rotate groups as a whole.
+
+                    The «g» element has one more important and great feature: it can have its own «title» and «desc»
+                    tags that help make it more accessible to screen readers, and overall make the code
+                    more readable to humans.
+                </aside>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Reusing</h2>
+                <p>
+                    Tags <strong>&lt;defs&gt;</strong>, <strong>&lt;use&gt;</strong>, <strong>&lt;symbol&gt;</strong>.
+                </p>
+                <aside class="notes" data-markdown>
+                    SVG provides the ability to reuse elements and groups.
+                </aside>
+            </section>
+            <section>
+                <h2>Reusing</h2>
+                <p>
+                    Individual elements.
+                </p>
+                <div class="sample" data-file="samples/reusing-1.svg"></div>
+                <aside class="notes" data-markdown>
+                    Different elements or groups which we want to reuse, should be putted inside the tag «defs».
+
+                    Then we include them in the document as many times as we want using the tag «use».
+
+                    Here is an example of reusing individual elements.
+                </aside>
+            </section>
+            <section>
+                <h2>Reusing</h2>
+                <p>
+                    Groups.
+                </p>
+                <div class="sample" data-file="samples/reusing-2.svg"></div>
+                <aside class="notes" data-markdown>
+                    And here is an example of reusing group.
+
+                    I also provided here the example of defining a style with the tag «use». Look at the central object.
+                </aside>
+            </section>
+            <section>
+                <h2>Reusing</h2>
+                <p>
+                    Symbols.
+                </p>
+                <div class="sample" data-file="samples/reusing-3.svg"></div>
+                <aside class="notes" data-markdown>
+                    The most perfect way to code reuse in svg are symbols.
+
+                    Symbol is defined with the «symbol» tag.
+
+                    Symbol is similar to a group, but it has important differences.
+
+                    Firstly, the symbol itself is never displayed. It is designed for use with the tag «use» only.
+
+                    So, you can put symbol-definitions inside «defs», or you can not put. No difference.
+
+                    Secondly, a symbol-definition has its own coordinate system, completely independent of the rest of the document.
+                    Symbol-definition has its own «viewBox» and «preserveAspectRatio» attributes.
+
+                    And when you use a symbol using the tag «use», you specify «width» and «height» attributes.
+                    These attributes play the role of the viewport for the symbol.
+
+                    Symbol's own coordinate system interacts with concrete viewports of «use»-tags in the same way
+                    as it does for global viewBox and viewport in SVG-document.
+                </aside>
+            </section>
+        </section>
+        <section>
+            <h2>What else</h2>
+            <p>Themes for explore:</p>
+            <ul>
+                <li>advanced design options: patterns, gradients...;</li>
+                <li>texts and typography;</li>
+                <li>transformations;</li>
+                <li>interactivity;</li>
+                <li>animations;</li>
+                <li>etc...</li>
+            </ul>
+            <aside class="notes" data-markdown>
+                In this short presentation, I tried to cover the basics of svg.
+
+                But many topics were left overs.
+
+                Here are some topics for further study.
+            </aside>
+        </section>
+        <section>
+            <h2>Thanks for attention!</h2>
+            <aside class="notes" data-markdown>
+                Thanks for attention!
+            </aside>
         </section>
     </div>
 </div>
@@ -228,13 +640,30 @@
 <script src="revealjs/js/reveal.js"></script>
 
 <script>
+    if (!Promise.allSettled) {
+        Promise.allSettled = promises =>
+            Promise.all(
+                promises.map((promise, i) =>
+                    promise
+                        .then(value => ({
+                            status: 'fulfilled',
+                            value,
+                        }))
+                        .catch(reason => ({
+                            status: 'rejected',
+                            reason,
+                        }))
+                )
+            );
+    }
+
     async function getFileContent(url) {
         const response = await fetch(url);
         return await response.text();
     }
 
     function cutHidden(xmlText) {
-        const regex = /<!-- Hide -->(.|\n)*<!-- \/Hide -->/ig;
+        const regex = /<!-- Hide -->(.|\n)*?<!-- \/Hide -->/ig;
         return xmlText.replace(regex, '');
     }
 
@@ -312,7 +741,6 @@
                 Reveal.toggleHelp();
             },
         },
-        navigationMode: 'linear',
         width: '100%',
         height: '100%'
     });

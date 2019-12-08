@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+     width="500" height="500" viewBox="-10 0 420 390">
+
+  <!-- Hidden library: -->
+  <defs>
+      <circle fill="yellow" r="50" id="sun"/>
+      <rect width="200" height="70" id="rect" fill="green"/>
+  </defs>
+
+  <!-- Visible usage: -->
+  <use href="#sun" x="100" y="60"/>
+  <use href="#rect" x="0" y="110"/>
+  <use href="#sun" x="300" y="260"/>
+  <use href="#rect" x="200" y="310"/>
+</svg>
