@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CodeJam — Pallete</title>
+  <link rel="stylesheet" href="bundle.css">
+</head>
+<body>
+<header class="header">
+  <div class="header__nav-btn">
+    <div class="icon nav-icon"></div>
+  </div>
+  <h1 class="header__caption">CodeJam — Pallete</h1>
+  <div class="header__user-info">
+    <a
+      href="https://github.com/login/oauth/authorize?client_id=1a7dce5adb088ba27537&redirect_uri=https%3A%2F%2Fcodejam-image-api-nordenf.netlify.com">
+      TODO: Login
+    </a>
+  </div>
+  <div class="header__menu-btn">
+    <div class="menu-icon"></div>
+  </div>
+</header>
+<div class="content">
+  <main class="main">
+    <div class="main__left">
+      <div class="panel panel-tools">
+        <div class="btn" id="paint-bucket" data-hotkey-code="KeyB">
+          <div class="btn__icon-wrapper">
+            <div class="paint-bucket-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Paint bucket
+          </button>
+        </div>
+        <div class="btn" id="choose-color" data-hotkey-code="KeyC">
+          <div class="btn__icon-wrapper">
+            <div class="choose-color-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Choose color
+          </button>
+        </div>
+        <div class="btn active" id="pencil" data-hotkey-code="KeyP">
+          <div class="btn__icon-wrapper">
+            <div class="pencil-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Pencil
+          </button>
+        </div>
+        <hr class="delimiter">
+        <div class="btn disabled">
+          <div class="btn__icon-wrapper">
+            <div class="move-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Move
+          </button>
+        </div>
+        <div class="btn disabled">
+          <div class="btn__icon-wrapper">
+            <div class="transform-icon"></div>
+          </div>
+          <button class="btn__caption">
+            Transform
+          </button>
+        </div>
+      </div>
+      <div class="panel panel-colors">
+        <div class="btn">
+          <label class="color-picker">
+            <input class="color-picker__control" type="color" id="switch-color"/>
+            <span class="color-picker__label">Current</span>
+          </label>
+        </div>
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" id="prev-color" disabled/>
+            <span class="color-picker__label">Prev</span>
+          </label>
+        </div>
+        <hr class="delimiter">
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" value="#ff0000" disabled/>
+            <span class="color-picker__label">Red</span>
+          </label>
+        </div>
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" value="#00ff00" disabled/>
+            <span class="color-picker__label">Green</span>
+          </label>
+        </div>
+        <div class="btn">
+          <label class="color-picker clickable">
+            <input class="color-picker__control" type="color" value="#0000ff" disabled/>
+            <span class="color-picker__label">Blue</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="work-area">
+      <div class="image-panel">
+        <button class="image-panel__load-btn" id="load_btn">
+          Load
+        </button>
+        <label class="image-panel__city-input-label">
+          <input class="image-panel__city-input" id="city_input">
+        </label>
+        <button class="image-panel__bw-btn" id="bw_btn">
+          B&W
+        </button>
+      </div>
+      <canvas id="canvas"></canvas>
+    </div>
+    <div class="main__column">
+      <div class="panel panel-switch">
+        <div class="btn center scale" data-scale="1">
+          <button class="btn__caption">
+            Original scale
+          </button>
+        </div>
+        <div class="btn center scale" data-scale="2">
+          <button class="btn__caption">
+            Zoom in x2
+          </button>
+        </div>
+        <div class="btn center scale" data-scale="4">
+          <button class="btn__caption">
+            Zoom in x4
+          </button>
+        </div>
+        <div class="btn center scale" data-scale="8">
+          <button class="btn__caption">
+            Zoom in x8
+          </button>
+        </div>
+        <div class="btn center scale" data-scale="16">
+          <button class="btn__caption">
+            Zoom in x16
+          </button>
+        </div>
+        <div class="btn center scale" data-scale="32">
+          <button class="btn__caption">
+            Zoom in x32
+          </button>
+        </div>
+        <div class="btn center scale" data-scale="64">
+          <button class="btn__caption">
+            Zoom in x64
+          </button>
+        </div>
+        <hr class="delimiter">
+        <div class="btn center">
+          <button class="btn__caption" id="remove_image">
+            Remove image
+          </button>
+        </div>
+        <div class="btn center">
+          <button class="btn__caption" id="remove_picture">
+            Clear picture
+          </button>
+        </div>
+        <div class="btn center">
+          <button class="btn__caption" id="reset">
+            Full reset
+          </button>
+        </div>
+        <div class="btn center">
+          <button class="btn__caption" id="save">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="bundle.js"></script>
+</body>
+</html>
