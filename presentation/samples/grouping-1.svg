@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+     width="500" height="500" viewBox="0 0 275 100">
+    <!-- Group 1  -->
+    <g id="to-sun">
+        <circle fill="purple" r="20" cx="25" cy="25"/>
+        <circle fill="crimson" r="20" cx="70" cy="25"/>
+        <circle fill="red" r="20" cx="115" cy="25"/>
+        <circle fill="orange" r="20" cx="160" cy="25"/>
+        <circle fill="gold" r="20" cx="205" cy="25"/>
+        <circle fill="yellow" r="20" cx="250" cy="25"/>
+    </g>
+    <!-- Group 2 -->
+    <g id="to-night">
+        <circle fill="greenyellow" r="20" cx="25" cy="70"/>
+        <circle fill="yellowgreen" r="20" cx="70" cy="70"/>
+        <circle fill="green" r="20" cx="115" cy="70"/>
+        <circle fill="steelblue" r="20" cx="160" cy="70"/>
+        <circle fill="darkviolet" r="20" cx="205" cy="70"/>
+        <circle fill="purple" r="20" cx="250" cy="70"/>
+    </g>
+</svg>

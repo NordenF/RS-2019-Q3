@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1"
+     xmlns="http://www.w3.org/2000/svg"
+     width="500" height="500"
+     viewBox="0 0 260 160">
+    <path fill="none" stroke="green" stroke-width="3px"
+          d="M 70,70    A 75,55 0 1 1 160,140
+             M 70,70    A 75,55 30 1 1 160,140
+             M 70,70    A 75,55 60 1 1 160,140
+             M 70,70    A 75,55 90 1 1 160,140
+             Z"/>
+</svg>
+<!--
+    Syntax:
+    A rx ry x-axis-rotation large-arc-flag sweep-flag x y
+    a rx ry x-axis-rotation large-arc-flag sweep-flag dx dy
+    Read the docs for details :)
+-->
