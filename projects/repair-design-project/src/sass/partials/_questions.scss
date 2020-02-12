@@ -1,0 +1,191 @@
+$questions-threshold-1: 1000px;
+$questions-threshold-2: 650px;
+
+.questions {
+  position: relative;
+  background-color: #202020;
+  @media (max-width: $media-threshold-mobile) {
+    background-color: #181818;
+  }
+}
+
+.questions__substrate {
+  position: absolute;
+  background-color: #ffffff;
+  width: 100%;
+  height: 329px;
+  @media (max-width: $media-threshold-mobile) {
+    display: none;
+  }
+}
+
+.questions__content {
+  position: relative;
+  padding-top: 107px;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: $media-threshold-mobile) {
+    padding-top: 41px;
+  }
+}
+
+
+.questions-form {
+  flex-basis: 883px;
+  flex-shrink: 1;
+  margin: 0 20px 0 41px;
+  background-color: #181818;
+  padding-top: 32px;
+  padding-bottom: 34px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  @media (max-width: $questions-threshold-1) {
+    margin: 0;
+  }
+}
+
+.questions-form__elements {
+  flex-basis: 519px;
+  padding: 0 49px 0;
+
+  @media (max-width: $questions-threshold-2) {
+    flex-basis: initial;
+    width: 100%;
+  }
+
+  @media (max-width: $media-threshold-mobile) {
+    padding: 0 17px 0;
+  }
+}
+
+.questions-form__header {
+  font: $yesevaOne_20_28;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 0;
+}
+
+.questions-form__first-row {
+  margin-top: 44px;
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: $media-threshold-mobile) {
+    flex-direction: column;
+    margin-top: 50px;
+  }
+}
+
+.questions-form__first-row-column {
+  width: 44.5%;
+  @media (max-width: $media-threshold-mobile) {
+    width: 100%;
+  }
+}
+
+%questions-form__field-label {
+  font: $futuraBookC_15_15;
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+}
+
+.questions-form__name-label {
+  @extend %questions-form__field-label;
+}
+
+.questions-form__phone-label {
+  @extend %questions-form__field-label;
+  @media (max-width: $media-threshold-mobile) {
+    margin-top: 60px;
+  }
+}
+
+.questions-form__question-label {
+  @extend %questions-form__field-label;
+  margin-top: 44px;
+  @media (max-width: $media-threshold-mobile) {
+    margin-top: 60px;
+  }
+}
+
+$questions-form__field-color: white;
+%questions-form__field {
+  font: $futuraBookC_18_24;
+  color: $questions-form__field-color;
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  border-bottom: rgba(255, 255, 255, 0.15) solid 1px;
+  display: block;
+  height: 33px;
+  box-sizing: border-box;
+
+  @media (max-width: $media-threshold-mobile) {
+    border-bottom: #FFFFFF solid 1px;
+  }
+
+  &::-webkit-input-placeholder {
+    color: $questions-form__field-color;
+  }
+
+  &:-ms-input-placeholder {
+    color: $questions-form__field-color;
+  }
+
+  &::-moz-placeholder {
+    color: $questions-form__field-color;
+    opacity: 1;
+  }
+}
+
+.questions-form__name {
+  @extend %questions-form__field;
+}
+
+.questions-form__phone {
+  @extend %questions-form__field;
+}
+
+.questions-form__question {
+  @extend %questions-form__field;
+}
+
+.questions-form__agree {
+  display: flex;
+  margin-top: 47px;
+  justify-content: center;
+  @media (max-width: $media-threshold-mobile) {
+    margin-top: 21px;
+    justify-content: flex-start;
+  }
+}
+
+.questions-form__agree-label {
+  font: $futuraBookC_16_22;
+  color: #FFFFFF;
+  margin-right: 1px;
+}
+
+.questions-form__submit-wrapper {
+  text-align: center;
+  margin-top: 51px;
+  @media (max-width: $media-threshold-mobile) {
+    margin-top: 68px;
+  }
+}
+
+.questions-form__submit {
+  @extend %btn;
+  font: $futuraDemiC_15_26;
+  height: 51px;
+  width: 200px;
+  color: #FFFFFF;
+  @media (max-width: $media-threshold-mobile) {
+    width: 100%;
+  }
+}
+
+.questions-form__submit-label {
+  display: none;
+}

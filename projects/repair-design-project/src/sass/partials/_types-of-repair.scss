@@ -1,0 +1,23 @@
+.types-of-repair {
+  padding-top: 113px;
+  @media (max-width: $media-threshold-mobile) {
+    padding-top: 39px;
+  }
+}
+
+.types-of-repair__header {
+  font: $yesevaOne_20_28;
+  text-align: center;
+  color: #181818;
+  margin-top: 0;
+  margin-bottom: 12px;
+  @media (max-width: $media-threshold-mobile) {
+    font: $yesevaOne_22_138pc;
+    margin-bottom: 15px;
+  }
+}
+
+.types-of-repair__theme-icon {
+  background: url("../assets/img/types-of-repair__theme-icon.svg") center center no-repeat;
+  height: 28px;
+}

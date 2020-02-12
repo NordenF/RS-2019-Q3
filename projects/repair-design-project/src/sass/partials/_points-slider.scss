@@ -1,0 +1,51 @@
+.points-slider {
+  display: flex;
+  align-items: flex-end;
+  @media (max-width: $media-threshold-2) {
+    align-items: flex-start;
+  }
+  @media (max-width: $media-threshold-mobile) {
+    display: none;
+  }
+
+  .points-slider__left, .points-slider__right {
+    width: 42px;
+    height: 13px;
+    cursor: pointer;
+  }
+
+  .points-slider__left {
+    background: url("../assets/img/arrow-left.svg") no-repeat;
+    margin-right: 29px;
+  }
+
+  .points-slider__points {
+    display: flex;
+    height: 12px;
+
+    .points-slider__point {
+      width: 10px;
+      height: 10px;
+      background: url("../assets/img/point.svg") no-repeat;
+      border-radius: 100%;
+      cursor: pointer;
+
+      &:not(:first-child) {
+        margin-left: 17px;
+      }
+    }
+
+    .points-slider__point.active {
+      background: url("../assets/img/point-active.svg") no-repeat;
+    }
+  }
+
+  .points-slider__right {
+    background: url("../assets/img/arrow-right.svg") no-repeat;
+    margin-left: 29px;
+  }
+
+  .points-slider__left:hover, .points-slider__right:hover, .points-slider__point:hover {
+    @include hover();
+  }
+}

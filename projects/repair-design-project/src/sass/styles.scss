@@ -1,0 +1,34 @@
+@import "partials/base";
+@import "partials/fonts";
+@import "partials/controls";
+@import "partials/top";
+@import "partials/points-slider";
+@import "partials/projects";
+@import "partials/online-control";
+@import "partials/types";
+@import "partials/types-of-repair";
+@import "partials/stages";
+@import "partials/wildest-fantasies";
+@import "partials/design-project";
+@import "partials/how-we-working";
+@import "partials/our-team";
+@import "partials/our-clients";
+@import "partials/questions";
+@import "partials/contacts";
+@import "partials/header-and-footer";
+
+$desktop-width: 1440px;
+
+body {
+  margin: 0;
+  min-width: 375px;
+}
+
+.wrapper {
+  max-width: $desktop-width;
+  margin: 0 auto;
+  height: 100%;
+  @media (max-width: $media-threshold-mobile) {
+    width: 375px;
+  }
+}

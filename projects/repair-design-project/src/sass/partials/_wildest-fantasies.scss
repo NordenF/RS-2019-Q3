@@ -1,0 +1,180 @@
+$wildest-fantasies-threshold-1: 1104px;
+$wildest-fantasies-threshold-2: 800px;
+
+$wildest-fantasies-rows: 72px 40.53px 162.47px 36.77px 317.09px 39.53px 268.61px 39.53px 41.33px;
+
+.wildest-fantasies {
+  margin-top: 131px;
+  display: grid;
+  grid-template-rows: $wildest-fantasies-rows;
+  grid-template-columns: 587fr 353.81px 43fr 353.81px 102fr;
+  grid-template-areas: ".        .       .  image3  ." ".        image1  .  image3  ." "content  image1  .  image3  ." "content  image1  .  .       ." "content  image1  .  image4  ." "content  .       .  image4  ." "content  image2  .  image4  ." "content  image2  .  .       ." ".        image2  .  .       .";
+
+  @media (max-width: $wildest-fantasies-threshold-1) {
+    grid-template-columns: 318fr 354fr 23fr 354fr 55fr;
+  }
+  @media (max-width: $wildest-fantasies-threshold-2) {
+    grid-template-rows: 100px $wildest-fantasies-rows;
+    grid-template-columns: 23fr 354fr 23fr 354fr 23fr;
+    grid-template-areas: "content        content       content  content  content" ".        .       .  image3  ." ".        image1  .  image3  ." ".  image1  .  image3  ." ".  image1  .  .       ." ".  image1  .  image4  ." ".  .       .  image4  ." ".  image2  .  image4  ." ".  image2  .  .       ." ".        image2  .  .       .";
+  }
+  @media (max-width: $media-threshold-mobile) {
+    grid-template-rows: 91px 88px 33px 33px 88px;
+    grid-template-columns: 37fr 353fr 353fr 37fr;
+    grid-template-areas: "content content content content" ". . . . " ". . . . " ". . . . " ". . . . ";
+    margin-top: 0;
+  }
+}
+
+.wildest-fantasies__substrate {
+  display: none;
+  @media (max-width: $media-threshold-mobile) {
+    display: block;
+    grid-area: -3 / 1 / -1 / -1;
+    background-color: black;
+  }
+}
+
+.wildest-fantasies__background {
+  grid-area: -8 / 1 / -2 / -1;
+  background: url("../assets/img/wildest-fantasies-background.png") no-repeat;
+  @media (max-width: $media-threshold-mobile) {
+    grid-area: 2 / 2 / -1 / -2;
+    background: url("../assets/img/wildest-fantasies-mobile.png") no-repeat;
+  }
+}
+
+.wildest-fantasies__content {
+  grid-area: content;
+  padding-top: 113px;
+  padding-left: 17.2%;
+  padding-right: 10px;
+  @media (max-width: $wildest-fantasies-threshold-2) {
+    padding: 0;
+  }
+}
+
+.wildest-fantasies__content-caption {
+  font: $yesevaOne_27_37;
+  color: #E3B873;
+  max-width: 300px;
+  @media (max-width: $wildest-fantasies-threshold-2) {
+    max-width: none;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  @media (max-width: $media-threshold-mobile) {
+    font: $yesevaOne_22_138pc;
+    max-width: 300px;
+    margin-top: 0;
+    margin-left: 38px;
+  }
+}
+
+.wildest-fantasies__content-list {
+  padding-left: 0;
+  margin-top: 30px;
+  @media (max-width: $wildest-fantasies-threshold-2) {
+    display: none;
+  }
+}
+
+$wildest-fantasies-content-list-item-color: #FFFFFF;
+$wildest-fantasies-content-list-item-active-color: #E3B873;
+
+.wildest-fantasies__content-list-item {
+  font: $proximaNova_20_49;
+  color: $wildest-fantasies-content-list-item-color;
+
+  &.active {
+    color: $wildest-fantasies-content-list-item-active-color;
+    width: max-content;
+    border-bottom: 1px solid #E3B873;
+    height: 38px;
+    margin-bottom: 10px;
+
+    &:hover {
+      color: darken($wildest-fantasies-content-list-item-active-color, 30%);
+    }
+  }
+
+  &:hover {
+    color: darken($wildest-fantasies-content-list-item-color, 30%);
+  }
+}
+
+.wildest-fantasies__content-list-item-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+$wildest-slider-size: 66px;
+
+.wildest-fantasies__slider {
+  display: none;
+  @media (max-width: $media-threshold-mobile) {
+    grid-area: 3 / 2 / 5 / -2;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.wildest-fantasies__slider-left, .wildest-fantasies__slider-right {
+  width: $wildest-slider-size;
+  height: $wildest-slider-size;
+  cursor: pointer;
+}
+
+.wildest-fantasies__slider-left {
+  background: url("../assets/img/wildest-fantasies-slider-left.svg") no-repeat;
+}
+
+.wildest-fantasies__slider-right {
+  background: url("../assets/img/wildest-fantasies-slider-right.svg") no-repeat;
+}
+
+.wildest-fantasies__slider-left:hover {
+  background: url("../assets/img/wildest-fantasies-slider-left-hover.svg") no-repeat;
+}
+
+.wildest-fantasies__slider-right:hover {
+  background: url("../assets/img/wildest-fantasies-slider-right-hover.svg") no-repeat;
+}
+
+
+.wildest-fantasies__substrate {
+  display: none;
+  @media (max-width: $media-threshold-mobile) {
+    display: block;
+    grid-area: -3 / 1 / -1 / -1;
+    background-color: black;
+  }
+}
+
+
+.wildest-fantasies__image {
+  @media (max-width: $media-threshold-mobile) {
+    display: none;
+  }
+}
+
+.wildest-fantasies__image1 {
+  grid-area: image1;
+  background: url("../assets/img/wildest-fantasies-image-1.png") no-repeat;
+}
+
+.wildest-fantasies__image2 {
+  grid-area: image2;
+  background: url("../assets/img/wildest-fantasies-image-2.png") no-repeat;
+}
+
+.wildest-fantasies__image3 {
+  grid-area: image3;
+  background: url("../assets/img/wildest-fantasies-image-3.png") no-repeat;
+}
+
+.wildest-fantasies__image4 {
+  grid-area: image4;
+  background: url("../assets/img/wildest-fantasies-image-4.png") no-repeat;
+}

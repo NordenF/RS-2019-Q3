@@ -1,0 +1,204 @@
+$media-projects-threshold-1: 1170px;
+
+.projects {
+  display: grid;
+  grid-template-rows: 128px 226px 257px;
+  grid-template-columns: 588px auto;
+  grid-template-areas: ". nav" "header images" "items images";
+  background-color: #131313;
+
+  @media (max-width: $media-projects-threshold-1) {
+    grid-template-areas: "nav nav" "header images" "items images";
+  }
+
+  @media (max-width: $media-threshold-2) {
+    grid-template-areas: "nav" "header" "items" "images";
+    grid-template-rows: 128px 226px 257px auto;
+    grid-template-columns: auto;
+  }
+
+  @media (max-width: $media-threshold-mobile) {
+    grid-template-rows: 244px 278px 190px;
+    grid-template-areas: "header" "images" "items";
+    grid-template-columns: auto;
+    background-color: #181818;
+  }
+}
+
+.projects__header {
+  grid-area: header;
+  padding-left: 96px;
+  padding-right: 70px;
+  @media (max-width: $media-threshold-mobile) {
+    padding: 0;
+    width: 313px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+.projects__header-header {
+  font: $yesevaOne_27_37;
+  letter-spacing: -0.07em;
+  color: #E3B873;
+  margin-top: 0;
+  width: 253px;
+  background: url("../assets/img/dash.svg") right 52px no-repeat;
+  @media (max-width: $media-threshold-mobile) {
+    font: $yesevaOne_22_138pc;
+    background: none;
+    width: 134px;
+    margin: 33px auto 26px;
+  }
+}
+
+.projects__header-comment {
+  font: $futuraBookC_18_29;
+  color: #FFFFFF;
+  @media (max-width: $media-threshold-mobile) {
+    font-size: 14px;
+    line-height: 158.48%;
+  }
+}
+
+.projects__nav {
+  grid-area: nav;
+  margin-top: 42px;
+  margin-right: 20px;
+  min-width: 535px;
+  @media (max-width: $media-projects-threshold-1) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: $media-threshold-2) {
+    min-width: 400px;
+    width: 400px;
+  }
+
+  @media (max-width: $media-threshold-mobile) {
+    display: none;
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    max-width: 623px;
+    padding: 0;
+  }
+
+  li:hover {
+    @include hover();
+  }
+
+  a {
+    font: $yesevaOne_14_19;
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+
+    &.active {
+      color: #E3B873;
+      text-decoration: underline;
+    }
+  }
+}
+
+.projects__images {
+  grid-area: images;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  @media (max-width: $media-threshold-mobile) {
+    width: 340px;
+    margin: 0 auto 35px;
+  }
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+
+  img:not(:first-child) {
+    margin-left: 21px;
+  }
+
+  .slider-left-arrow {
+    display: none;
+    @media (max-width: $media-threshold-mobile) {
+      display: block;
+      background: url("../assets/img/slider-mobile-left-arrow.svg") no-repeat;
+      position: absolute;
+      left: 13px;
+      top: 104px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      &:hover {
+        background: url("../assets/img/slider-mobile-left-arrow-hover.svg") no-repeat;
+      }
+    }
+  }
+
+  .slider-right-arrow {
+    background: url("../assets/img/slider-right-arrow.svg") no-repeat;
+    width: 85px;
+    height: 85px;
+    position: absolute;
+    right: 37px;
+    top: 191px;
+    cursor: pointer;
+
+    &:hover {
+      background: url("../assets/img/slider-right-arrow-hover.svg") no-repeat;
+    }
+
+    @media (max-width: $media-threshold-mobile) {
+      background: url("../assets/img/slider-mobile-right-arrow.svg") no-repeat;
+      width: 36px;
+      height: 36px;
+      right: 13px;
+      top: 104px;
+      &:hover {
+        background: url("../assets/img/slider-mobile-right-arrow-hover.svg") no-repeat;
+      }
+    }
+  }
+}
+
+.projects__items {
+  grid-area: items;
+  display: grid;
+  grid-template-rows: 1fr 1fr 43px;
+  grid-template-columns: 1fr 1fr;
+  padding-left: 96px;
+  padding-right: 112px;
+  @media (max-width: $media-threshold-mobile) {
+    grid-template-rows: 1fr 1fr;
+    padding-left: 18px;
+    padding-right: 37px;
+  }
+
+  .points-slider {
+    grid-column: 1 / span 2;
+  }
+}
+
+.projects__item-name {
+  font: $yesevaOne_18_25;
+  color: #E3B873;
+  margin: 0;
+  @media (max-width: $media-threshold-mobile) {
+    font-size: 14px;
+    line-height: 138.6%;
+  }
+}
+
+.projects__item-description {
+  font: $futuraBookC_15_20;
+  color: #FFFFFF;
+  margin-top: 5px;
+  @media (max-width: $media-threshold-mobile) {
+    font-size: 14px;
+    line-height: 135.84%;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,103 @@
+.design-project {
+  position: relative;
+  background-color: #131313;
+  @media (max-width: $media-threshold-mobile) {
+    background-color: #181818;
+  }
+}
+
+.design-project__substrate {
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  height: 580px;
+  @media (max-width: $media-threshold-mobile) {
+    display: none;
+  }
+}
+
+.design-project__content {
+  position: relative;
+  padding-top: 110px;
+
+  @media (max-width: $media-threshold-mobile) {
+    padding-top: 50px;
+  }
+}
+
+.design-project__header {
+  font: $yesevaOne_20_28;
+  text-align: center;
+  color: #181818;
+  margin-top: 0;
+  margin-bottom: 13px;
+  @media (max-width: $media-threshold-mobile) {
+    font: $yesevaOne_22_138pc;
+    color: #FFFFFF;
+  }
+}
+
+.design-project__theme-icon {
+  background: url("../assets/img/design-project__theme-icon.svg") center center no-repeat;
+  height: 29px;
+}
+
+.design-project__text {
+  font: $futuraBookC_20_27;
+  text-align: center;
+  color: #363636;
+  margin: 18px auto 47px;
+  @media (max-width: $media-threshold-mobile) {
+    font: $futuraBookC_15_135pc;
+    color: #FFFFFF;
+    max-width: 287px;
+    margin: 20px auto 1px 39px;
+  }
+}
+
+
+.design-project {
+  .types {
+    @media (max-width: 555px) {
+      margin: 39px auto 0;
+    }
+  }
+
+  .types__item.mini {
+    grid-template-rows: 294px 127px 57px 27px 27px;
+    @media (max-width: $media-threshold-mobile) {
+      grid-template-rows: 223px 142px 14px 20px 20px;
+    }
+  }
+
+  .types__item.standard {
+    grid-template-rows: 294px 127px 132px 27px 27px;
+    @media (max-width: $media-threshold-mobile) {
+      grid-template-rows: 225px 142px 79px 19px 22px;
+    }
+  }
+
+  .types__item.full {
+    grid-template-rows: 294px 127px 260px 27px 27px;
+    @media (max-width: $media-threshold-mobile) {
+      grid-template-rows: 222px 143px 78px 20px 21px;
+    }
+  }
+
+  .types__item-buy {
+    text-align: left;
+    padding-left: 32px;
+    padding-top: 4px;
+    @media (max-width: $media-threshold-mobile) {
+      padding-left: 46px;
+    }
+  }
+
+  .types__item-features {
+    box-shadow: none;
+  }
+
+  .types__item:last-child {
+    margin-bottom: 0;
+  }
+}

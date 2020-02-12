@@ -1,0 +1,285 @@
+$online-control-threshold-1: 900px;
+$video-original-width: 817px;
+$video-original-height: 434px;
+
+$video-resizable-width: percentage($video-original-width / $online-control-threshold-1);
+$video-resizable-height: percentage($video-original-height / $online-control-threshold-1);
+
+$form-original-width: 769px;
+$form-resizable-width: percentage($form-original-width / $online-control-threshold-1);
+
+
+.online-control {
+  background-color: white;
+  height: 1080px;
+  @media (max-width: $media-threshold-mobile) {
+    height: 880px;
+  }
+}
+
+.online-control__top-substrate {
+  background-color: #131313;
+  height: 415px;
+  @media (max-width: $media-threshold-mobile) {
+    height: 837px;
+    background-color: #181818;
+  }
+}
+
+.online-control__wrapper {
+  position: relative;
+  top: -325px;
+  @media (max-width: $media-threshold-mobile) {
+    top: -825px;
+  }
+}
+
+.online-control__header {
+  font: $yesevaOne_20_28;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 0;
+  margin-bottom: 12px;
+  @media (max-width: $media-threshold-mobile) {
+    font: $yesevaOne_22_138pc;
+    margin-bottom: 18px;
+  }
+}
+
+.online-control__theme-icon {
+  background: url("../assets/img/online-control__theme-icon.svg") center center no-repeat;
+  height: 29px;
+}
+
+.online-control__video {
+  position: relative;
+  width: 817px;
+  height: 434px;
+  display: block;
+  margin: 32px auto 61px;
+  box-sizing: border-box;
+  @media (max-width: $online-control-threshold-1) {
+    width: $video-resizable-width;
+    height: 0;
+    position: relative;
+    box-sizing: border-box;
+    padding-top: $video-resizable-height;
+  }
+  @media (max-width: $media-threshold-mobile) {
+    width: 340px;
+    height: 205px;
+    margin: 39px auto 29px;
+  }
+}
+
+.online-control__video-iframe {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+
+  @media (max-width: $online-control-threshold-1) {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+.online-control__video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.online-control__video-play-btn {
+  background: url("../assets/img/video-play-btn.svg") no-repeat;
+  width: 145px;
+  height: 145px;
+  cursor: pointer;
+
+  &:hover {
+    background: url("../assets/img/video-play-btn-hover.svg") no-repeat;
+  }
+
+  @media (max-width: $media-threshold-mobile) {
+    width: 97px;
+    height: 97px;
+    background: url("../assets/img/video-play-btn-mobile.svg") no-repeat;
+    &:hover {
+      background: url("../assets/img/video-play-btn-mobile-hover.svg") no-repeat;
+    }
+  }
+}
+
+.online-control__delimiter-icon {
+  background: url("../assets/img/online-control__delimiter-icon.svg") center center no-repeat;
+  height: 3px;
+}
+
+.online-control__text {
+  width: 685px;
+  margin: 26px auto 94px;
+  font: $futuraBookC_20_34;
+  text-align: center;
+  color: #363636;
+  @media (max-width: $online-control-threshold-1) {
+    width: auto;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  @media (max-width: $media-threshold-mobile) {
+    font: $futuraBookC_14_169pc;
+    color: #FFFFFF;
+    width: 340px;
+    margin: 17px auto 30px;
+  }
+}
+
+.online-control-form {
+  width: $form-original-width;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 16px 34px 53px;
+  grid-template-columns: 37.45% 36.4% auto;
+  grid-template-areas: "name-label phone-label submit" "name phone submit" "agree agree agree";
+  @media (max-width: $online-control-threshold-1) {
+    width: $form-resizable-width;
+  }
+
+  @media (max-width: $media-threshold-mobile) {
+    width: 340px;
+    grid-template-rows: 20px 28px 78px 29px 45px 113px;
+    grid-template-columns: auto;
+    grid-template-areas: "name-label" "name" "phone-label" "phone" "agree" "submit";
+  }
+}
+
+
+%online-control-form__field-label {
+  font: $futuraBookC_15_20;
+  color: rgba(54, 54, 54, 0.5);
+  @media (max-width: $media-threshold-mobile) {
+    color: rgba(255, 255, 255, 0.5);
+    align-self: end;
+  }
+}
+
+.online-control-form__name-label {
+  @extend %online-control-form__field-label;
+  grid-area: name-label;
+}
+
+.online-control-form__phone-label {
+  @extend %online-control-form__field-label;
+  grid-area: phone-label;
+
+  .desktop {
+    @media (max-width: $media-threshold-mobile) {
+      display: none;
+    }
+  }
+
+  .mobile {
+    display: none;
+    @media (max-width: $media-threshold-mobile) {
+      display: inline;
+    }
+  }
+}
+
+$online-control-form__field-color: #363636;
+$online-control-form__field-color-mobile: white;
+%online-control-form__field {
+  font: $futuraBookC_18_24;
+  color: $online-control-form__field-color;
+  width: 82%;
+  border: none;
+  border-bottom: rgb(238, 238, 238) inset 2px;
+
+  &::-webkit-input-placeholder {
+    color: $online-control-form__field-color;
+  }
+
+  &:-ms-input-placeholder {
+    color: $online-control-form__field-color;
+  }
+
+  &::-moz-placeholder {
+    color: $online-control-form__field-color;
+    opacity: 1;
+  }
+
+  @media (max-width: $media-threshold-mobile) {
+    font: $futuraBookC_18_138pc;
+    color: $online-control-form__field-color-mobile;
+    background-color: transparent;
+    border-bottom-width: 1px;
+    height: 33px;
+    align-self: end;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+      color: $online-control-form__field-color-mobile;
+    }
+
+    &:-ms-input-placeholder {
+      color: $online-control-form__field-color-mobile;
+    }
+
+    &::-moz-placeholder {
+      color: $online-control-form__field-color-mobile;
+      opacity: 1;
+    }
+  }
+}
+
+.online-control-form__name {
+  @extend %online-control-form__field;
+  grid-area: name;
+}
+
+.online-control-form__phone {
+  @extend %online-control-form__field;
+  grid-area: phone;
+}
+
+.online-control-form__submit {
+  @extend %btn;
+  grid-area: submit;
+  font: $futuraDemiC_15_26;
+  width: 100%;
+  @media (max-width: $media-threshold-mobile) {
+    height: 51px;
+    align-self: end;
+    width: 100%;
+  }
+}
+
+.online-control-form__submit-label {
+  display: none;
+}
+
+.online-control-form__agree {
+  grid-area: agree;
+  align-self: end;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: $media-threshold-mobile) {
+    justify-self: start;
+  }
+}
+
+.online-control-form__agree-label {
+  font: $futuraBookC_16_22;
+  color: #181818;
+  @media (max-width: $media-threshold-mobile) {
+    color: #FFFFFF;
+  }
+}

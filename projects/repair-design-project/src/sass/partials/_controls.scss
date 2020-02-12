@@ -1,0 +1,67 @@
+%btn {
+  font: $futuraDemiC_13_15;
+  text-align: center;
+  color: #FFFFFF;
+  background: #E3B873;
+  box-shadow: 0 5px 15px rgba(227, 184, 115, 0.2);
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    background: #e39b29;
+  }
+}
+
+%transparent {
+  background: transparent;
+  border: 1px solid white;
+  box-shadow: 0 0 4px 3px rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background: rgba(255, 245, 191, 0.1);
+    border-color: #E3B873;
+    color: #E3B873;
+  }
+}
+
+@mixin hover() {
+  background-color: #635f5a;
+  box-shadow: 0 0 4px 3px #635f5a;
+}
+
+input[type=checkbox].css-checkbox {
+  padding: 0;
+  margin: 0;
+  width: 1px;
+  height: 1px;
+  z-index: -1;
+  position: relative;
+  left: 10px;
+}
+
+input[type=checkbox].css-checkbox + label.css-label {
+  padding-left: 26px;
+  height: 18px;
+  display: inline-block;
+  line-height: 18px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+  background-position: 0 -18px;
+}
+
+label.css-label {
+  background-image: url("../assets/img/checkbox.svg");
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

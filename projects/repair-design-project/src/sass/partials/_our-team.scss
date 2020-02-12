@@ -1,0 +1,190 @@
+$our-team-threshold-1: 650px;
+
+.our-team {
+  position: relative;
+  background-color: white;
+}
+
+.our-team__substrate {
+  position: absolute;
+  background-color: #131313;
+  width: 100%;
+  height: 501px;
+  @media (max-width: $media-threshold-mobile) {
+    height: 100%;
+    background-color: #181818;
+  }
+}
+
+.our-team__content {
+  position: relative;
+  padding-top: 92px;
+
+  @media (max-width: $media-threshold-mobile) {
+    padding-top: 74px;
+  }
+}
+
+.our-team__header {
+  font: $yesevaOne_20_28;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 0;
+  margin-bottom: 13px;
+  @media (max-width: $media-threshold-mobile) {
+    font: $yesevaOne_22_138pc;
+    color: #FFFFFF;
+  }
+}
+
+.our-team__theme-icon {
+  background: url("../assets/img/our-team__theme-icon.svg") center center no-repeat;
+  height: 29px;
+}
+
+.our-team__text {
+  font: $futuraBookC_20_27;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 18px auto 50px;
+  @media (max-width: $media-threshold-mobile) {
+    font: $futuraBookC_15_135pc;
+    margin-bottom: 46px;
+  }
+}
+
+.our-team__delimiter-icon {
+  background: url("../assets/img/our-team__delimiter-icon.svg") center center no-repeat;
+  height: 2px;
+  @media (max-width: $media-threshold-mobile) {
+    display: none;
+  }
+}
+
+.our-team__text-bottom {
+  font: $futuraBookC_20_34;
+  text-align: center;
+  color: #363636;
+  margin: 7px 20px 0;
+
+  @media (max-width: $our-team-threshold-1) {
+    font: $futuraBookC_18_26;
+  }
+  @media (max-width: $media-threshold-mobile) {
+    display: none;
+  }
+}
+
+.employees {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  justify-content: center;
+}
+
+.employees__employe {
+  position: relative;
+  width: 342px;
+  height: 449px;
+  margin: 0 18px 52px;
+  @media (max-width: $media-threshold-mobile) {
+    width: 339px;
+
+    margin-bottom: 54px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.employees__employe-photo {
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  width: 272px;
+  height: 358px;
+  @media (max-width: $media-threshold-mobile) {
+    width: 304px;
+  }
+
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    &.desktop {
+      display: inline;
+    }
+
+    &.mobile {
+      display: none;
+    }
+
+    @media (max-width: $media-threshold-mobile) {
+      &.desktop {
+        display: none;
+      }
+
+      &.mobile {
+        display: inline;
+      }
+    }
+  }
+}
+
+.employees__employe-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #E3B873;
+  box-shadow: 0 5px 20px rgba(#E3B873, .5);
+}
+
+.employees__employe-resume {
+  position: absolute;
+  bottom: 0;
+  left: 54px;
+  width: 233px;
+  height: 137px;
+
+  background-color: white;
+  @media (max-width: $media-threshold-mobile) {
+    left: 65px;
+  }
+
+  h3 {
+    font: $yesevaOne_18_25;
+    text-align: center;
+    color: #181818;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  p {
+    font: $futuraBookC_18_26;
+    text-align: center;
+    color: #959595;
+    margin-top: 2px;
+    margin-bottom: 0;
+  }
+}
+
+.employees__employe-experience {
+  position: absolute;
+  top: 93px;
+  width: 100%;
+  height: 44px;
+  background-color: #E3B873;
+  font: $yesevaOne_13_20;
+  text-align: center;
+  color: #FFFFFF;
+  padding-top: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 15px rgba(black, .05);
+}

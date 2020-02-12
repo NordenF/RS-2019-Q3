@@ -1,0 +1,81 @@
+@font-face {
+  font-family: "FuturaBookC";
+  src: url("../assets/fonts/FuturaBookC.woff") format("woff"),
+  url("../assets/fonts/FuturaBookC.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FuturaDemiC";
+  src: url("../assets/fonts/FuturaDemiC.woff") format("woff"),
+  url("../assets/fonts/FuturaDemiC.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FuturaMediumC";
+  src: url("../assets/fonts/FuturaMediumC.woff") format("woff"),
+  url("../assets/fonts/FuturaMediumC.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova Rg";
+  src: url("../assets/fonts/ProximaNova-Regular.woff") format("woff"),
+  url("../assets/fonts/ProximaNova-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Yeseva One";
+  src: url("../assets/fonts/YesevaOne.woff") format("woff"),
+  url("../assets/fonts/YesevaOne.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+$futuraBookC_13_169pc: 13px / 169.8% "FuturaBookC", sans-serif;
+$futuraBookC_14_16: 14px / 16px "FuturaBookC", sans-serif;
+$futuraBookC_14_169pc: 14px / 169.8% "FuturaBookC", sans-serif;
+$futuraBookC_15_135pc: 15px / 135.84% "FuturaBookC", sans-serif;
+$futuraBookC_15_15: 15px / 15px "FuturaBookC", sans-serif;
+$futuraBookC_15_180pc: 15px / 180% "FuturaBookC", sans-serif;
+$futuraBookC_15_18: 15px / 18px "FuturaBookC", sans-serif;
+$futuraBookC_15_20: 15px / 20px "FuturaBookC", sans-serif;
+$futuraBookC_15_25: 15px / 25px "FuturaBookC", sans-serif;
+$futuraBookC_15_25: 15px / 25px "FuturaBookC", sans-serif;
+$futuraBookC_16_22: 16px / 22px "FuturaBookC", sans-serif;
+$futuraBookC_18_138pc: 18px / 138.72% "FuturaBookC", sans-serif;
+$futuraBookC_18_24: 18px / 24px "FuturaBookC", sans-serif;
+$futuraBookC_18_26: 18px / 26px "FuturaBookC", sans-serif;
+$futuraBookC_18_29: 18px / 29px "FuturaBookC", sans-serif;
+$futuraBookC_20_27: 20px / 27px "FuturaBookC", sans-serif;
+$futuraBookC_20_34: 20px / 34px "FuturaBookC", sans-serif;
+$futuraBookC_22_30: 22px / 30px "FuturaBookC", sans-serif;
+$futuraDemiC_12_14: 12px / 14px "FuturaDemiC", sans-serif;
+$futuraDemiC_13_15: 13px / 15px "FuturaDemiC", sans-serif;
+$futuraDemiC_13_18: 13px / 18px "FuturaDemiC", sans-serif;
+$futuraDemiC_14_16: 14px / 16px "FuturaDemiC", sans-serif;
+$futuraDemiC_15_21: 15px / 21px "FuturaDemiC", sans-serif;
+$futuraDemiC_15_26: 15px / 26px "FuturaDemiC", sans-serif;
+$futuraDemiC_20_25: 20px / 25px "FuturaDemiC", sans-serif;
+$futuraMediumC_18_21: 18px / 21px "FuturaMediumC", sans-serif;
+$futuraMediumC_18_25: 18px / 25px "FuturaMediumC", sans-serif;
+$proximaNova_20_49: 20px / 49px "Proxima Nova Rg", sans-serif;
+$yesevaOne_13_20: 13px / 20px "Yeseva One", serif;
+$yesevaOne_14_19: 14px / 19px "Yeseva One", serif;
+$yesevaOne_15_138pc: 15px / 138.6% "Yeseva One", serif;
+$yesevaOne_15_21: 15px / 21px "Yeseva One", serif;
+$yesevaOne_15_23: 15px / 23px "Yeseva One", serif;
+$yesevaOne_17_24: 17px / 24px "Yeseva One", serif;
+$yesevaOne_18_138pc: 18px / 138.6% "Yeseva One", serif;
+$yesevaOne_18_23: 18px / 23px "Yeseva One", serif;
+$yesevaOne_18_25: 18px / 25px "Yeseva One", serif;
+$yesevaOne_20_28: 20px / 28px "Yeseva One", serif;
+$yesevaOne_22_138pc: 22px / 138.6% "Yeseva One", serif;
+$yesevaOne_27_37: 27px / 37px "Yeseva One", serif;
+$yesevaOne_40_53: 40px / 53px "Yeseva One", serif;

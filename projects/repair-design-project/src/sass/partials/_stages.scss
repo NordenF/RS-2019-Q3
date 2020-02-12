@@ -1,0 +1,271 @@
+$stages-threshold-1: 950px;
+
+.stages {
+  display: flex;
+  margin-top: 120px;
+  @media (max-width: $stages-threshold-1) {
+    flex-wrap: wrap;
+  }
+  @media (max-width: $media-threshold-mobile) {
+    display: none;
+  }
+}
+
+$stages__main-circle--size: 636.12px;
+$stages__main-circle--border-width: 3px;
+
+$circles-buildings-left: 158px;
+$circles-buildings-top: -55px;
+
+.stages__container {
+  position: relative;
+  overflow: hidden;
+  width: 800px;
+  height: 640px;
+  flex-shrink: 3;
+}
+
+.stages__background {
+  position: absolute;
+  right: 320px;
+  height: $stages__main-circle--size;
+  background: white url("../assets/img/circles-buildings.svg") $circles-buildings-left $circles-buildings-top no-repeat;
+}
+
+.stages__main-circle {
+  position: relative;
+  width: $stages__main-circle--size;
+  height: $stages__main-circle--size;
+  background: linear-gradient(90deg, rgba(227, 184, 115, 0), rgba(227, 184, 115, 1));
+  border-radius: 50%;
+}
+
+$stages__main-circle-inner--size: $stages__main-circle--size - $stages__main-circle--border-width * 2;
+
+.stages__main-circle-inner {
+  position: relative;
+  left: $stages__main-circle--border-width;
+  top: $stages__main-circle--border-width;
+  width: $stages__main-circle-inner--size;
+  height: $stages__main-circle-inner--size;
+  border-radius: 50%;
+  background: white url("../assets/img/circles-buildings.svg") $circles-buildings-left - $stages__main-circle--border-width $circles-buildings-top - $stages__main-circle--border-width no-repeat;
+}
+
+.stages__stage {
+  position: absolute;
+  font: $futuraMediumC_18_21;
+  color: #363636;
+  height: 60px;
+  background-color: white
+}
+
+.stages__disc {
+  position: absolute;
+  width: 41.76px;
+  height: 41.76px;
+  background-color: #E3B873;
+  border-radius: 50%;
+  font: $yesevaOne_18_25;
+  text-align: center;
+  padding-top: 9px;
+  color: #FFFFFF;
+  box-sizing: border-box;
+}
+
+.stages__stage-1 {
+  left: 501px;
+  top: 61px;
+  padding-left: 72px;
+  padding-top: 0;
+  height: 48px;
+  width: 441px;
+
+  .stages__disc {
+    top: 1px;
+    left: 13px;
+
+  }
+}
+
+.stages__stage-2 {
+  left: 579px;
+  top: 167px;
+  height: 48px;
+  padding-top: 14px;
+  padding-left: 68px;
+  width: 172px;
+
+  .stages__disc {
+    top: 6px;
+    left: 10px;
+  }
+}
+
+.stages__stage-3 {
+  left: 602px;
+  top: 322px;
+  padding-top: 21px;
+  padding-left: 68px;
+  width: 195px;
+
+  .stages__disc {
+    top: 11px;
+    left: 12px;
+  }
+}
+
+$stage-4-left: 536px;
+$stage-4-top: 485px;
+
+.stages__stage-4 {
+  left: $stage-4-left;
+  top: $stage-4-top;
+  background: white url("../assets/img/circles-buildings.svg") $circles-buildings-left - $stage-4-left $circles-buildings-top - $stage-4-top no-repeat;
+  padding-left: 68px;
+  padding-top: 7px;
+  width: 298px;
+
+  .stages__disc {
+    top: 8px;
+    left: 13px;
+  }
+}
+
+.stages__form-column {
+  width: 506px;
+  margin-top: 51px;
+  margin-right: 10px;
+  margin-left: 33px;
+  flex-shrink: 1;
+  @media (max-width: $stages-threshold-1) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.stages-form {
+  width: 100%;
+  height: 509px;
+  background-color: #131313;
+  padding: 24px 49px 0;
+  box-sizing: border-box;
+}
+
+.stages-form__header {
+  font: $futuraDemiC_20_25;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 0;
+}
+
+%stages-form__field-label {
+  font: $futuraBookC_15_20;
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  margin-top: 44px;
+}
+
+.stages-form__name-label {
+  @extend %stages-form__field-label;
+  margin-top: 37px;
+}
+
+.stages-form__phone-label {
+  @extend %stages-form__field-label;
+}
+
+.stages-form__email-label {
+  @extend %stages-form__field-label;
+}
+
+$stages-form__field-color: white;
+%stages-form__field {
+  font: $futuraMediumC_18_25;
+  color: $stages-form__field-color;
+  background-color: transparent;
+  width: 82%;
+  border: none;
+  border-bottom: rgba(255, 255, 255, 0.15) inset 1px;
+  display: block;
+  height: 33px;
+  box-sizing: border-box;
+
+  &::-webkit-input-placeholder {
+    color: $stages-form__field-color;
+  }
+
+  &:-ms-input-placeholder {
+    color: $stages-form__field-color;
+  }
+
+  &::-moz-placeholder {
+    color: $stages-form__field-color;
+    opacity: 1;
+  }
+}
+
+.stages-form__name {
+  @extend %stages-form__field;
+}
+
+.stages-form__phone {
+  @extend %stages-form__field;
+}
+
+.stages-form__email {
+  @extend %stages-form__field;
+}
+
+.stages-form__agree {
+  display: flex;
+  margin-top: 16px;
+}
+
+.stages-form__agree-label {
+  font: $futuraBookC_16_22;
+  color: #FFFFFF;
+}
+
+.stages-form__submit-wrapper {
+  text-align: right;
+  margin-top: 40px;
+}
+
+.stages-form__submit {
+  @extend %btn;
+  font: $futuraDemiC_13_18;
+  height: 49px;
+  width: 212px;
+}
+
+.stages-form__submit-label {
+  display: none;
+}
+
+.stages__banner-wrapper {
+  padding-top: 37px;
+  padding-left: 34px;
+}
+
+$save-cost-banner-size: 72px;
+.save-cost-banner {
+  height: $save-cost-banner-size;
+  box-sizing: border-box;
+  font: $futuraDemiC_20_25;
+  color: #E3B873;
+  text-shadow: 0 3px 10px rgba(227, 184, 115, 0.15);
+  display: grid;
+  grid-template-columns: $save-cost-banner-size auto;
+}
+
+.save-cost-banner__icon {
+  height: $save-cost-banner-size;
+  width: $save-cost-banner-size;
+  border-radius: 50%;
+  background: #E3B873 url("../assets/img/pig.svg") 16px 19px no-repeat;
+}
+
+.save-cost-banner__text {
+  margin: 9px 25px;
+}
