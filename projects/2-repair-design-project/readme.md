@@ -1,9 +1,9 @@
-# Repair design project
+# Task «Repair design project»
 
-A [task](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/markups/level-3/repair-design-project/repair-design-project-en.md)
-from RSSchool-cource. 
+## Task description
+See [task](task.md)
 
-# How to build
+## How to build
 
 * Run ```npm install```;
 * run ```npm run build```;

@@ -1,4 +1,7 @@
-# Task [Codejam Palette](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-2/codejam-palette/codejam-palette_en.md) for RSSchool
+# Task «Codejam Palette»
+
+## Task description
+See [task/codejam-palette_en.md](task/codejam-palette_en.md) or [task/codejam-palette_ru.md](task/codejam-palette_ru.md). 
 
 ## Demo
 [http://codejam-palette.nordenf.surge.sh/](http://codejam-palette.nordenf.surge.sh/)

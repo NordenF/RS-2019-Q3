@@ -1,4 +1,7 @@
-# Task [Codejam-image-api](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-2/codejam-image-api/codejam-image-api_ru.md) for RSSchool
+# Task «Codejam Image-API
+
+## Task description
+See [task/codejam-image-api_ru.md](task/codejam-image-api_ru.md). 
 
 ## Demo
 [https://codejam-image-api-nordenf.netlify.com/](https://codejam-image-api-nordenf.netlify.com/)
