@@ -1,4 +1,4 @@
-# Different tasks, implemented during [The Rolling Scopes School](https://rs.school/) JavaScript-course
+## Different tasks, implemented during [The Rolling Scopes School](https://rs.school/) JavaScript-course
 
 ## Table of contents
 * CSS-learning:

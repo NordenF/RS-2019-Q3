@@ -1,1 +1,1 @@
-# Various simple (and not so) javascript exercises
+## Various simple (and not so) javascript exercises
