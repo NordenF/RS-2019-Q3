@@ -1,0 +1,54 @@
+.keyboard {
+  width: 100%;
+}
+
+.keyboard__row {
+  display: flex;
+  justify-content: stretch;
+
+  &:not(:last-child) {
+    margin-bottom: 5px;
+  }
+}
+
+.keyboard__btn {
+  height: 40px;
+  flex-grow: 1;
+
+  &:not(:last-child) {
+    margin-right: 5px;
+  }
+}
+
+.keyboard__btn.small {
+  width: 40px;
+  flex-grow: 0;
+}
+
+.keyboard__btn.space {
+  flex-grow: 5;
+}
+
+.keyboard__btn.pressed {
+  background-color: #68ff85;
+}
+
+.language-switcher {
+  display: block;
+  margin: 40px auto 0;
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.keyboard.caps-lock .letter {
+  text-transform: uppercase;
+}
+
+.keyboard:not(.caps-lock) .letter {
+  text-transform: lowercase;
+}
+
+.keyboard.caps-lock .caps-lock-btn {
+  background-color: #00ffff4a;
+}

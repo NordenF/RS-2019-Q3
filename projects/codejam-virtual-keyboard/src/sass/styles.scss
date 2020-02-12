@@ -1,0 +1,14 @@
+@import "partials/base";
+@import "partials/textarea";
+@import "partials/keyboard";
+
+$width: 702px;
+
+body {
+  min-width: $width;
+}
+
+.content {
+  width: $width;
+  margin: 0 auto;
+}

@@ -1,0 +1,48 @@
+.panel {
+  width: 228px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+  box-shadow: 0 4px 4px rgba(black, 0.24);
+}
+
+.paint-bucket-icon {
+  @extend %icon;
+  background-image: url("../assets/img/paint-bucket.svg");
+}
+
+.choose-color-icon {
+  @extend %icon;
+  background-image: url("../assets/img/choose-color.svg");
+}
+
+.move-icon {
+  @extend %icon;
+  background-image: url("../assets/img/move.svg");
+}
+
+.transform-icon {
+  @extend %icon;
+  background-image: url("../assets/img/transform.svg");
+}
+
+
+.current-color-icon {
+  @extend %color-icon;
+  background-color: #C4C4C4;
+}
+
+.prev-color-icon {
+  @extend %color-icon;
+  background-color: #41F795;
+}
+
+.red-color-icon {
+  @extend %color-icon;
+  background-color: red;
+}
+
+.blue-color-icon {
+  @extend %color-icon;
+  background-color: blue;
+}

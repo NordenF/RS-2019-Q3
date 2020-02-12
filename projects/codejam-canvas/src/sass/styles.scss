@@ -1,0 +1,23 @@
+@import "partials/reset";
+@import "partials/base";
+@import "partials/fonts";
+@import "partials/elements";
+@import "partials/header";
+@import "partials/panel";
+@import "partials/main";
+@import "partials/canvas";
+
+$min-width: 550px;
+
+body {
+  min-width: $min-width;
+}
+
+$content-padding: 20px;
+
+.content {
+  max-width: $max-width;
+  padding: $header-height + $content-padding $content-padding 0 $content-padding;
+  margin: 0 auto;
+}
+
