@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+.project-viewer-controls {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 3px dotted #a9a9a7;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.project-viewer-controls__btn {
+  display: block;
+  width: 130px;
+  height: 30px;
+  margin: 10px;
+  padding: 3px 7px;
+
+  text-align: center;
+  text-decoration: none;
+  color: black;
+
+  cursor: pointer;
+  background-color: rgb(221, 221, 221);
+  border: 1px outset rgb(221, 221, 221);
+}
+
+.project-viewer-controls__btn.hidden {
+  display: none;
+}
+
+.project-viewer {
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.project-viewer[src=""] {
+  display: none;
+}

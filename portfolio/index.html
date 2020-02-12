@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RSSchool-portfolio</title>
+
+  <link rel="stylesheet" href="swiperjs/swiper.min.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div class="content">
+  <header class="header">
+    <div class="header__left">
+      <img class="photo" src="assets/photo.jpeg" alt="Alexander Lebedev" width="460" height="460">
+    </div>
+    <div class="header__right">
+      <h1>Alexander Lebedev</h1>
+      <a class="link" href="https://github.com/NordenF">https://github.com/NordenF</a>
+      <a class="link" href="https://vk.com/amikko">https://vk.com/amikko</a>
+    </div>
+  </header>
+  <main>
+    <hr>
+    <section class="education" id="education">
+      <div class="education__handler" id="education__handler">
+        <h2 class="education__header">Education
+          <div class="education__handler-arrow"></div>
+        </h2>
+      </div>
+      <div class="education__body">
+        <ul class="education__list">
+          <li class="education__list-item">
+            Moscow technical university of communications and informatics,<br>
+            Faculty of information technology,<br>
+            2006–2011;
+          </li>
+          <li class="education__list-item">
+            RSSchool courses,<br>
+            2019–2020.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <hr>
+    <section class="projects">
+      <h2 class="projects__header">Projects</h2>
+      <div class="carousel">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="project">
+                <h3 class="carousel__item-name">Theyalow</h3>
+                <div class="carousel__item-switcher">
+                  <button class="carousel__item-switcher-btn">
+                    <span class="image-mode-text">Show description</span>
+                    <span class="description-mode-text">Hide description</span>
+                  </button>
+                </div>
+                <div class="carousel__item-description">
+                  A task within studying front-end on RSSchool-course.
+                  HTML/CSS development of single page in accordance with the provided Photoshop-design.
+                  <ul>
+                    <li>
+                      Browser support: Google Chrome, Mozilla Firefox, Microsoft Edge.
+                    </li>
+                    <li>
+                      Devices support: desktop and mobile versions.
+                    </li>
+                  </ul>
+                </div>
+                <div class="carousel__item-tooltip">
+                  Click on image
+                  to see the project
+                </div>
+                <div class="carousel__item-image">
+                  <a href="project.html?p=theyalow&desktop=1100&mobile=650" title="Open demo">
+                    <img class="desktop" src="projects/theyalow/desktop.jpg" alt="Theyalow" width="300" height="425">
+                    <img class="mobile" src="projects/theyalow/mobile.jpg" alt="Theyalow" width="300" height="375">
+                  </a>
+                </div>
+              </div>
+              <div class="carousel__swipe-area">
+                <span class="carousel__swipe-left">&lt;&lt;&lt;</span> Swipe to see other <span
+                class="carousel__swipe-right">&gt;&gt;&gt;</span>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="project">
+                <h3 class="carousel__item-name">Repair design project</h3>
+                <div class="carousel__item-switcher">
+                  <button class="carousel__item-switcher-btn">
+                    <span class="image-mode-text">Show description</span>
+                    <span class="description-mode-text">Hide description</span>
+                  </button>
+                </div>
+                <div class="carousel__item-description">
+                  A final project of the first stage of front-end studying on RSSchool-course.
+                  HTML/SASS/webpack development of single page in accordance with the provided figma-design.
+                  <ul>
+                    <li>
+                      Browser support: Google Chrome, Mozilla Firefox, Microsoft Edge.
+                    </li>
+                    <li>
+                      Devices support: desktop and mobile versions.
+                    </li>
+                    <li>
+                      Support of different screen resolutions between desktop and mobile.
+                    </li>
+                  </ul>
+                </div>
+                <div class="carousel__item-tooltip">
+                  Click on image
+                  to see the project
+                </div>
+                <div class="carousel__item-image">
+                  <a href="project.html?p=repair-design-project&desktop=1445&mobile=380" title="Open demo">
+                    <img class="desktop" src="projects/repair-design-project/desktop.png" alt="Repair design project"
+                         width="300" height="425">
+                    <img class="mobile" src="projects/repair-design-project/mobile.png" alt="Repair design project"
+                         width="300" height="375">
+                  </a>
+                </div>
+              </div>
+              <div class="carousel__swipe-area">
+                <span class="carousel__swipe-left">&lt;&lt;&lt;</span> Swipe to see other <span
+                class="carousel__swipe-right">&gt;&gt;&gt;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-button-prev">
+        </div>
+        <div class="swiper-button-next">
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="swiperjs/swiper.min.js"></script>
+<script src="index.js"></script>
+</body>
