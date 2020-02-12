@@ -1,5 +1,7 @@
-Task [Portfolio](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/stage-1/portfolio/portfolio-ru.md)
-from RSSchool-course.
+# Task «Portfolio»
+
+## Task description
+See [task/portfolio-ru.md](task/portfolio-ru.md)
 
 ## Live demo
 **[Here](https://nordenf-portfolio.netlify.com/)**
